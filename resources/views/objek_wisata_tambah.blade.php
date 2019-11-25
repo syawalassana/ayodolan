@@ -1,76 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Form Tambah</title>
-</head>
-<body>
-  @if (count ($errors) > 0)
-  <div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
+@extends ('layouts.master')
+@section ('isi')
+@if (count ($errors) > 0)
+<div class="alert alert-danger">
+  <ul>
+    @foreach ($errors->all() as $error)
         <li> {{ $error}} </li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
+    @endforeach
+  </ul>
+</div>
+@endif
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Quick Example</h3>
+  </div>
+  <!-- /.box-header -->
+  <!-- form start -->
   <form action="/objek-wisata/" method="post" enctype="multipart/form-data">
-    @csrf
-    <table>
-    <tr>
-      <td>
-        Nama Wisata
-      </td>
-      <td>
-        <input type="text" name="nama_wisata" value="{{old('nama_wisata')}}" >
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Lokasi Wisata
-      </td>
-      <td>
-        <input type="text" name="lokasi" value="{{old('lokasi')}}">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Harga Tiket Wisata
-      </td>
-      <td>
-        <input type="text" name="harga" value="{{old('harga')}}">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Gambaran Objek Wisata
-      </td>
-      <td>
-						<input type="file" name="gambar">
-					</div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Diskripsi Objek Wisata
-      </td>
-      <td>
-        <input type="text" name="deskripsi" value="{{old('deskripsi')}}">
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>
-        <input class="btn btn-primary" type="submit" value="Tambah">
-        <a href="/objek-wisata"><button type="button">Kembali</button></a>
-      </td>
-    </tr>
-
-    </tr>
-
-  </table>
-</form>
-</body>
-</html>
+  @csrf
+    <div class="box-body">
+      <div class="form-group">
+        <label>Nama Wisata</label>
+        <input type="text" name="nama_wisata" value="{{old('nama_wisata')}}" class="form-control"  placeholder="Masukan Nama">
+      </div>
+      <div class="form-group">
+        <label>Lokasi Wisata</label>
+        <input type="text" name="lokasi" value="{{old('lokasi')}}" class="form-control" name="lokasi" placeholder="Lokasi Objek Wisata">
+      </div>
+      <div class="form-group">
+        <label>Harga Tiket</label>
+        <input type="text" name="harga" value="{{old('harga')}}" placeholder="Masukan Harga" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Gambar Objek Wisata</label>
+        <input input type="file" name="gambar">
+      </div>
+      <div class="form-group">
+        <label>Diskripsi Objek Wisata</label>
+        <textarea name="deskripsi" class="form-control" placeholder="Masukan Diskripsi" value="{{old('deskripsi')}}"></textarea>
+      </div>
+      
+    </div>
+    <div class="box-footer">
+    <input class="btn btn-primary" type="submit" value="Tambah">
+        <a class="btn btn-warning" href="/objek-wisata">Kembali</a>
+    </div>
+  </form>
+</div>
+@endsection

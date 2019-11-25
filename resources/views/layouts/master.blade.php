@@ -518,7 +518,7 @@
     </section>
 
     <section class="content">
-        @yield('isibro')
+        @yield('isi')
     </section>
   </div>
   <!-- /.content-wrapper -->
