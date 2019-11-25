@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Objek Wisata</title>
-  </head>
-  <body>
-    <a href="/objek-wisata/create"> Tambah Data</a>
+@extends('layouts.master')
+
+@section('content')
+<a href="/objek-wisata/create"> Tambah Data</a>
 
     <table border="1">
-
-
       <tr>
         <th>
           nama wisata
@@ -27,11 +21,9 @@
         Diskripsi
       </th>
       <th>OPSI</th>
-
-
       </tr>
 
-        @foreach ($data as $row) <!-- -->
+        @foreach ($data as $row)
         <tr>
           <td>
             {{$row -> nama_wisata}}
@@ -53,16 +45,9 @@
             <input name="_method" type="hidden" value="DELETE">
             <button class="btn btn-danger" type="submit">Delete</button>
           </form>
-            
-            </td
+
+            </td>
         </tr>
-
-
-
         @endforeach
     </table>
-    <tr>
-
-    </tr>
-  </body>
-</html>
+@endsection
