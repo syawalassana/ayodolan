@@ -16,7 +16,7 @@
       </ul>
     </div>
     @endif
-  <form action="/objek-wisata/" method="post">
+  <form action="/objek-wisata/" method="post" enctype="multipart/form-data">
     @csrf
     <table>
     <tr>
@@ -48,7 +48,8 @@
         Gambaran Objek Wisata
       </td>
       <td>
-        <input type="text" name="gambar" value="{{old('gambar')}}">
+						<input type="file" name="gambar">
+					</div>
       </td>
     </tr>
     <tr>

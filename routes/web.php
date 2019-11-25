@@ -15,7 +15,8 @@
 //      return view('objek_wisata');
 //});
 
-Route::get('/','ObjekWisataController@index');
+Route::get('/objekwisata','ObjekWisataController@index');
+Route::get('/', 'FrontController@index');
 
 
 Auth::routes();

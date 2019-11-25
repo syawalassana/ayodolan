@@ -43,11 +43,18 @@
             {{$row -> harga}}
           </td>
           <td>
-            {{$row -> gambar}}
+            <img width="500" src="/objekwisata/{{$row -> gambar }}"/>
           </td>
-          <td>{{$row -> deskripsi}}</th>
-              <td><a href="/objek-wisata/{id}/edit">Update</a></td>
-            </td>
+          <td>{{$row -> deskripsi}}</td>
+          <td><a href="/objek-wisata/{{$row->id}}/edit">Update</a></td>
+            <td>
+            <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/objek-wisata/{{$row->id}}" method="post">
+            @csrf
+            <input name="_method" type="hidden" value="DELETE">
+            <button class="btn btn-danger" type="submit">Delete</button>
+          </form>
+            
+            </td
         </tr>
 
 

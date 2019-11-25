@@ -48,7 +48,7 @@ class ObjekWisataController extends Controller
             'nama_wisata'=> 'required', //data tidak boleh kosong
             'lokasi' => 'required',
             'harga' => 'required | numeric',
-            'gambar' => 'required',
+            'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:2048', 
             'deskripsi' => 'required',
 
         ],$messages);
@@ -61,7 +61,14 @@ class ObjekWisataController extends Controller
         $data_wisata->nama_wisata = $request->nama_wisata;
         $data_wisata->lokasi = $request->lokasi;
         $data_wisata->harga = $request->harga;
-        $data_wisata->gambar = $request->gambar;
+        
+        $gambar = $request->file('gambar');
+		$nama_gambar = time()."_".$gambar->getClientOriginalName();
+ 
+      	// isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'objekwisata';
+		$gambar->move($tujuan_upload,$nama_gambar);
+        $data_wisata->gambar = $nama_gambar;
         $data_wisata->deskripsi = $request->deskripsi;
         $data_wisata->save();
         if($data_wisata){
@@ -89,8 +96,10 @@ class ObjekWisataController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('objek_wisata_edit', ['data'=>ObjekWisata]);
+        $objekWisata=ObjekWisata::find($id);
+        
+
+        return view('objek_wisata_edit', ['data'=>$objekWisata]);
 
     }
 
@@ -103,7 +112,34 @@ class ObjekWisataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return 'Ini testing';
+        $messages = [
+            'required' => ':attribute Tidak Boleh Kosong',
+            'numeric' => ':attribute harus angka',
+
+        ];
+        $validator = Validator::make($request->all(),[
+            'nama_wisata'=> 'required', //data tidak boleh kosong
+            'lokasi' => 'required',
+            'harga' => 'required | numeric',
+            'gambar' => 'required',
+            'deskripsi' => 'required',
+
+        ],$messages);
+        if ($validator->fails()){
+          return redirect('/objek-wisata/create')
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $data_wisata = ObjekWisata::find($id);
+        $data_wisata->nama_wisata = $request->nama_wisata;
+        $data_wisata->lokasi = $request->lokasi;
+        $data_wisata->harga = $request->harga;
+        $data_wisata->gambar = $request->gambar;
+        $data_wisata->deskripsi = $request->deskripsi;
+        $data_wisata->save();
+        if($data_wisata){
+          return redirect('/objek-wisata');
+        }
     }
 
     /**
@@ -114,10 +150,12 @@ class ObjekWisataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $objekwisata = ObjekWisata::find($id);
+        $objekwisata->delete();
+        return redirect("/objek-wisata");
     }
 
     public function testing(){
-      return 'Ini testing';
+      
     }
 }
