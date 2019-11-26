@@ -17,9 +17,9 @@ class ObjekWisataController extends Controller
     {
         // return ObjekWisata::all();
         $items=[
-            'data'=> ObjekWisata::orderBY('nama_wisata')->paginate()
+            'data'=> ObjekWisata::orderBy('nama_wisata')->paginate()
         ];
-        return view('objek_wisata', $items);
+        return view('objekwisata.objek_wisata', $items);
     }
 
     /**
@@ -30,7 +30,7 @@ class ObjekWisataController extends Controller
     public function create()
     {
         //
-        return view ('objek_wisata_tambah');
+        return view ('objekwisata.objek_wisata_tambah');
     }
 
     /**
@@ -101,7 +101,7 @@ class ObjekWisataController extends Controller
         $objekWisata=ObjekWisata::find($id);
 
 
-        return view('objek_wisata_edit', ['data'=>$objekWisata]);
+        return view('objekwisata.objek_wisata_edit', ['data'=>$objekWisata]);
 
     }
 
