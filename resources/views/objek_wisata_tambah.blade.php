@@ -11,7 +11,7 @@
 @endif
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Quick Example</h3>
+    <h3 class="box-title">Form Objek Wisata</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
@@ -36,7 +36,7 @@
       </div>
       <div class="form-group">
         <label>Diskripsi Objek Wisata</label>
-        <textarea name="deskripsi" class="form-control" placeholder="Masukan Diskripsi" value="{{old('deskripsi')}}"></textarea>
+        <textarea name="deskripsi" class="form-control" placeholder="Masukan Diskripsi" >{{old('deskripsi')}}</textarea>
       </div>
       
     </div>

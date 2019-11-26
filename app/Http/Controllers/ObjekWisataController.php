@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\ObjekWisata;
-use App\User;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -16,8 +16,10 @@ class ObjekWisataController extends Controller
     public function index()
     {
         // return ObjekWisata::all();
-
-        return view('objek_wisata', ['data'=> ObjekWisata::all()]);
+        $items=[
+            'data'=> ObjekWisata::orderBY('nama_wisata')->simplePaginate(3)
+        ];
+        return view('objek_wisata', $items);
     }
 
     /**
@@ -156,6 +158,7 @@ class ObjekWisataController extends Controller
     }
 
     public function testing(){
-      
+        
     }
+    
 }
