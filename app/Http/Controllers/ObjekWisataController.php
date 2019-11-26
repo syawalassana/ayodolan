@@ -17,7 +17,7 @@ class ObjekWisataController extends Controller
     {
         // return ObjekWisata::all();
         $items=[
-            'data'=> ObjekWisata::orderBY('nama_wisata')->simplePaginate(3)
+            'data'=> ObjekWisata::orderBY('nama_wisata')->paginate()
         ];
         return view('objek_wisata', $items);
     }
@@ -50,7 +50,7 @@ class ObjekWisataController extends Controller
             'nama_wisata'=> 'required', //data tidak boleh kosong
             'lokasi' => 'required',
             'harga' => 'required | numeric',
-            'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:2048', 
+            'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'deskripsi' => 'required',
 
         ],$messages);
@@ -63,10 +63,10 @@ class ObjekWisataController extends Controller
         $data_wisata->nama_wisata = $request->nama_wisata;
         $data_wisata->lokasi = $request->lokasi;
         $data_wisata->harga = $request->harga;
-        
+
         $gambar = $request->file('gambar');
 		$nama_gambar = time()."_".$gambar->getClientOriginalName();
- 
+
       	// isi dengan nama folder tempat kemana file diupload
 		$tujuan_upload = 'objekwisata';
 		$gambar->move($tujuan_upload,$nama_gambar);
@@ -99,7 +99,7 @@ class ObjekWisataController extends Controller
     public function edit($id)
     {
         $objekWisata=ObjekWisata::find($id);
-        
+
 
         return view('objek_wisata_edit', ['data'=>$objekWisata]);
 
@@ -158,7 +158,7 @@ class ObjekWisataController extends Controller
     }
 
     public function testing(){
-        
+
     }
-    
+
 }
