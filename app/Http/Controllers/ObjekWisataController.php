@@ -63,7 +63,6 @@ class ObjekWisataController extends Controller
         $data_wisata->nama_wisata = $request->nama_wisata;
         $data_wisata->lokasi = $request->lokasi;
         $data_wisata->harga = $request->harga;
-
         $gambar = $request->file('gambar');
 		$nama_gambar = time()."_".$gambar->getClientOriginalName();
 
@@ -119,16 +118,17 @@ class ObjekWisataController extends Controller
             'numeric' => ':attribute harus angka',
 
         ];
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[ //memfalidasi form inputan
             'nama_wisata'=> 'required', //data tidak boleh kosong
             'lokasi' => 'required',
             'harga' => 'required | numeric',
             'gambar' => 'required',
             'deskripsi' => 'required',
+            //required = data wajib diisi, numeric=data angka, email, uniqe=inputan tidak boleh sama dalam 1 table
 
         ],$messages);
         if ($validator->fails()){
-          return redirect('/objek-wisata/create')
+          return redirect('objek-wisata/'.$id.'/edit')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -136,7 +136,19 @@ class ObjekWisataController extends Controller
         $data_wisata->nama_wisata = $request->nama_wisata;
         $data_wisata->lokasi = $request->lokasi;
         $data_wisata->harga = $request->harga;
-        $data_wisata->gambar = $request->gambar;
+        if($request->has('gambar')){
+            $gambar = $request->file('gambar');
+            $nama_gambar = time()."_".$gambar->getClientOriginalName();
+              // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'objekwisata';
+            $gambar->move($tujuan_upload,$nama_gambar);
+            if(file_exists('objekwisata/'.$data_wisata->gambar)){
+                //skrip untuk menghapus data foto lama yang di update
+            unlink('objekwisata/'.$data_wisata->gambar);    
+            }
+            $data_wisata->gambar=$nama_gambar;
+            
+        }
         $data_wisata->deskripsi = $request->deskripsi;
         $data_wisata->save();
         if($data_wisata){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Wisatawan;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,50 @@ class WisatawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messages = [
+            'required' => ':attribute Tidak Boleh Kosong',
+            'numeric' => ':attribute harus angka',
+
+        ];
+        $validator = Validator::make($request->all(),[
+        'nama_wisatawan'=> 'required',
+        'tanggal_lahir'=> 'required',
+        'alamat'=> 'required',
+        'foto' => 'required',
+        'telpon'=> 'required',
+        ],$messages
+    );
+    if($validator->fails()){
+     return direct('/wisatawan/create')
+                ->withErrors('$validator')
+                ->withInput();
+    }
+    $users=new User();
+    $users->name=$request->nama_wisatawan;
+    $users->email=$request->email;
+    $users->password=bcrypt('ayodolan');
+    $users->role_id=2;
+    $users->save();
+    if($users){
+    //masuk table wisatawan
+        $data_wisatawan = new Wisatawan;
+        $data_wisatawan->user_id=$users->id;
+        $data_wisatawan->tanggal_lahir=$request->tanggal_lahir;
+        $data_wisatawan->alamat=$request->alamat;
+        $foto=$request->file('foto');
+        $nama_foto = time()."_".$foto->getClientOriginalName();
+        // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload = 'fotowisatawan';
+        $foto->move($tujuan_upload,$nama_foto);
+        $data_wisatawan->foto = $nama_foto;
+        $data_wisatawan->deskripsi = $request->deskripsi;
+        $data_wisatawan->save();   
+    }
+    //^masuk table users
+    if($data_wisatawan){
+        return redirect('/wisatwan');
+    }
+    $data_wisatawan->telpon=$request->telpon;
     }
 
     /**
@@ -69,9 +113,63 @@ class WisatawanController extends Controller
      * @param  \App\Wisatawan  $wisatawan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Wisatawan $wisatawan)
+    public function update(Request $request, $id)
     {
-        //
+        {
+            $messages = [
+                'required' => ':attribute Tidak Boleh Kosong',
+                'numeric' => ':attribute harus angka',
+    
+            ];
+            $validator = Validator::make($request->all(),[
+            'nama_wisatawan'=> 'required',
+            'tanggal_lahir'=> 'required',
+            'alamat'=> 'required',
+            'foto' => 'required',
+            'telpon'=> 'required',
+            ],$messages
+        );
+        if($validator->fails()){
+            return redirect('wisatawan/'.$id.'/edit')
+                    ->withErrors('$validator')
+                    ->withInput();
+        }
+        $data_wisatawan=Wisatawan::find($id);
+        $users=User::find($data_wisatawan->user_id);
+        $users->name=$request->nama_wisatawan;
+        $users->email=$request->email;
+        $users->password=bcrypt('ayodolan');
+        $users->role_id=2;
+        $users->save();
+        if($users){
+        //masuk table wisatawan
+            $data_wisatawan->user_id=$users->id;
+            $data_wisatawan->tanggal_lahir=$request->tanggal_lahir;
+            $data_wisatawan->alamat=$request->alamat;
+            if($request->has('foto')){
+                $foto = $request->file('foto');
+                $nama_foto = time()."_".$foto->getClientOriginalName();
+                  // isi dengan nama folder tempat kemana file diupload
+                $tujuan_upload = 'wisatawan';
+                $foto->move($tujuan_upload,$nama_foto);
+                if(file_exists('wisatawan/'.$data_wisatawan->foto)){
+                    //skrip untuk menghapus data foto lama yang di update
+                unlink('wisatawan/'.$data_wisatawan->foto);    
+                }
+                $data_wisatawan->foto=$nama_foto;                
+            $data_wisatawan->deskripsi = $request->deskripsi;
+            $data_wisatawan->save();   
+
+
+            
+            }
+        }
+        //^masuk table users
+        if($data_wisatawan){
+            return redirect('/wisatwan');
+        }
+        $data_wisatawan->telpon=$request->telpon;
+        }
     }
 
     /**

@@ -44,7 +44,7 @@
     </div>
     <!-- /.box-body -->
     <div class="box-footer clearfix">
-      {!!$data->links()!!}
+            {{ $data->links() }}
     </div>
   </div>
 
@@ -52,6 +52,6 @@
 
 
     <table border="1">
-
+     
     </table>
 @endsection

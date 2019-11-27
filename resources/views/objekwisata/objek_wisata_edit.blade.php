@@ -24,9 +24,6 @@
       </ul>
     </div>
     @endif
-  <form action="/objek-wisata/{{$data->id}}" method="post">
-  <input type="hidden" name="_method" value="PUT">
-    @csrf
 
   <form action="/objek-wisata/{{$data->id}}" method="post" enctype="multipart/form-data">
   <input type="hidden" name="_method" value="PUT">
