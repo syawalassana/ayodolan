@@ -23,4 +23,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/objek-wisata', 'ObjekWisataController');
-Route::resource('/wisatawan', 'WistawanController');
+Route::resource('/wisatawan', 'WisatawanController');

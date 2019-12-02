@@ -52,8 +52,8 @@ class ObjekWisataController extends Controller
             'harga' => 'required | numeric',
             'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'deskripsi' => 'required',
-
-        ],$messages);
+        ],$messages
+    );
         if ($validator->fails()){
           return redirect('/objek-wisata/create')
                     ->withErrors($validator)
@@ -132,6 +132,7 @@ class ObjekWisataController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
+        
         $data_wisata = ObjekWisata::find($id);
         $data_wisata->nama_wisata = $request->nama_wisata;
         $data_wisata->lokasi = $request->lokasi;
