@@ -34,7 +34,8 @@
                 </a>
                 <ul class="treeview-menu">
                 <li><a href="/objek-wisata"><i class="fa fa-circle-o"></i> Objek Wisata</a></li>
-               
+                <li><a href="/wisatawan"><i class="fa fa-circle-o"></i>Data Wisatawan</a></li>
+                <li><a href="/event"><i class="fa fa-circle-o"></i>Data Event Kota</a></li>
                 </ul>
             </li>
             <li class="treeview">

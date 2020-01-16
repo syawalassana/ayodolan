@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Wisatawan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class WisatawanController extends Controller
 {
@@ -16,8 +17,9 @@ class WisatawanController extends Controller
     public function index()
     {
       $items=[
-          'data'=>Wisatawan::orderBy('nama_wisatawan')->paginate()
+          'data'=>Wisatawan::with('user')->paginate()
       ];
+      return view ('wisatawan.wisatawan', $items);
     }
 
     /**
@@ -38,6 +40,7 @@ class WisatawanController extends Controller
      */
     public function store(Request $request)
     {
+        
         $messages = [
             'required' => ':attribute Tidak Boleh Kosong',
             'numeric' => ':attribute harus angka',
@@ -52,10 +55,12 @@ class WisatawanController extends Controller
         ],$messages
     );
     if($validator->fails()){
-     return direct('/wisatawan/create')
-                ->withErrors('$validator')
+     return redirect('/wisatawan/create')
+                ->withErrors($validator)
                 ->withInput();
+
     }
+    
     $users=new User();
     $users->name=$request->nama_wisatawan;
     $users->email=$request->email;
@@ -74,12 +79,12 @@ class WisatawanController extends Controller
         $tujuan_upload = 'fotowisatawan';
         $foto->move($tujuan_upload,$nama_foto);
         $data_wisatawan->foto = $nama_foto;
-        $data_wisatawan->deskripsi = $request->deskripsi;
+        $data_wisatawan->telpon =$request->telpon;
         $data_wisatawan->save();   
     }
     //^masuk table users
     if($data_wisatawan){
-        return redirect('/wisatwan');
+        return redirect('/wisatawan');
     }
     $data_wisatawan->telpon=$request->telpon;
     }
@@ -103,7 +108,11 @@ class WisatawanController extends Controller
      */
     public function edit(Wisatawan $wisatawan)
     {
-        //
+        $items=[
+            'data'=>$wisatawan
+        ];
+        return view ('wisatawan.wisatawan_edit', $items);
+        
     }
 
     /**
@@ -178,8 +187,14 @@ class WisatawanController extends Controller
      * @param  \App\Wisatawan  $wisatawan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wisatawan $wisatawan)
+    public function destroy($id)
     {
-        //
+        $wisatawan = Wisatawan::find($id);
+        $user_id= $wisatawan->user_id;
+        $wisatawan->delete();
+        $user=User::find($user_id);
+        $user->delete();
+        return redirect("/wisatawan");
+
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ObjekWisata;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class ObjekWisataController extends Controller
 {
