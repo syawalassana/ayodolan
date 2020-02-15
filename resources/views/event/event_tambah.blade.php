@@ -36,15 +36,11 @@
         </div>
         <div class="form-group">
             <label>Lokasi Event</label>
-            <input name="lokasi" class="form-control" placeholder="Masukan Alamat Anda" >{{old('alamat')}}</textarea>
-        </div>
-        <div class="form-group">
-            <label>Lokasi Event</label>
             <input type="text" name="lokasi" value="{{old('lokasi')}}" class="form-control"  placeholder="Masukan Lokasi Event">
         </div>
         <div class="form-group">
             <label>Foto</label>
-            <input input type="file" name="foto">
+            <input input type="file" name="gambar_event">
         </div>
         <div class="form-group">
             <label>Deskripsi Event</label>

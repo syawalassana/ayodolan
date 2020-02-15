@@ -50,7 +50,7 @@ class ObjekWisataController extends Controller
             'nama_wisata'=> 'required', //data tidak boleh kosong
             'lokasi' => 'required',
             'harga' => 'required | numeric',
-            'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
             'deskripsi' => 'required',
         ],$messages
     );
@@ -122,7 +122,7 @@ class ObjekWisataController extends Controller
             'nama_wisata'=> 'required', //data tidak boleh kosong
             'lokasi' => 'required',
             'harga' => 'required | numeric',
-            'gambar' => 'required',
+            'gambar' => 'nullable',
             'deskripsi' => 'required',
             //required = data wajib diisi, numeric=data angka, email, uniqe=inputan tidak boleh sama dalam 1 table
 
@@ -150,7 +150,7 @@ class ObjekWisataController extends Controller
             $data_wisata->gambar=$nama_gambar;
             
         }
-        $data_wisata->deskripsi = $request->deskripsi;
+        $data_wisata->deskripsi=$request->deskripsi;
         $data_wisata->save();
         if($data_wisata){
           return redirect('/objek-wisata');

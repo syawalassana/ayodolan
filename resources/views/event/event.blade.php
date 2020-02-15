@@ -32,7 +32,7 @@
         <td>{{$row -> tgl_mulai}}</td>
         <td>{{$row -> tgl_selesai}}</td>
         <td>{{$row -> lokasi}}</td>
-        <td><img width="100" src="/event/{{$row -> gambar }}"/></td>
+        <td><img width="100" src="/event/{{$row -> gambar_event }}"/></td>
         <td>{{$row -> deskripsi_event}}</td>
         <td><a class="btn btn-warning" href="/event/{{$row->id}}/edit">Update</a></td>
         <td>

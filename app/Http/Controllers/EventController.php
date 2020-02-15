@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Event;
-use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
@@ -39,33 +39,35 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-            $messages=[
-                'required'=>':Kolom Harus Diisi',
-                'numeric'=> ':Kolom Harus Berisi Angka', 
-            ];
+        $messages = [
+            'required' => ':attribute Tidak Boleh Kosong',
+            'numeric' => ':attribute harus angka',
 
-        $validator=Validator::make($request->all(),[
-            'nama_event'=>'required',
-            'tgl_event'=>'required',
-            'tgl_mulai'=>'required',
-            'tgl_akhir'=>'required',
-            'lokasi'=>'required',
-            'gambar_event'=>'required|file|image|mimes:jpeg,png,jpg|max:2048',
-            'deskripsi_event'=> 'required'
-        ], $messages
-        );
-            if($validator->fails()){
-                return redirect('/event/create')
+        ];
+        $validator = Validator::make($request->all(),[
+            'nama_event'=> 'required', //data tidak boleh kosong
+            'lokasi' => 'required',
+            'gambar_event' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'deskripsi_event' => 'required',
+        ],$messages
+    );
+        if ($validator->fails()){
+          return redirect('/event/create')
                     ->withErrors($validator)
                     ->withInput();
-            }
-        $data_event=new Event;
+        }
+        $data_event = new Event;
         $data_event->nama_event=$request->nama_event;
         $data_event->tgl_event=$request->tgl_event;
         $data_event->tgl_mulai=$request->tgl_mulai;
         $data_event->tgl_selesai=$request->tgl_selesai;
         $data_event->lokasi=$request->lokasi;
-        $data_event->gambar_event=$request->gambar_event;
+        $gambar = $request->file('gambar_event');
+        $nama_gambar = time()."_".$gambar->getClientOriginalName();
+        $tujuan_upload = 'event';
+
+        $gambar->move($tujuan_upload,$nama_gambar);
+        $data_event->gambar_event = $nama_gambar;
         $data_event->deskripsi_event=$request->deskripsi_event;
         $data_event->save();
         if($data_event){
@@ -93,9 +95,12 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
+        {
+            $event=Event::find($id);
+            return view('event.event_edit', ['data'=>$event]);
+        }
+    
+
 
     /**
      * Update the specified resource in storage.
@@ -106,7 +111,49 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+            //return $request->all();
+            $messages = [
+                'required' => ':attribute Tidak Boleh Kosong',
+                'numeric' => ':attribute harus angka',
+    
+            ];
+            $validator = Validator::make($request->all(),[
+                'nama_event'=> 'required', //data tidak boleh kosong
+                'lokasi' => 'required',
+                'gambar_event' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
+                'deskripsi_event' => 'required',
+            ],$messages
+        );
+            if ($validator->fails()){
+                return redirect('event/'.$id.'/edit')
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+            $data_event = Event::find($id);
+            $data_event->nama_event=$request->nama_event;
+            $data_event->tgl_event=$request->tgl_event;
+            $data_event->tgl_mulai=$request->tgl_mulai;
+            $data_event->tgl_selesai=$request->tgl_selesai;
+            $data_event->lokasi=$request->lokasi;
+            if($request->has('gambar_event')){
+                $gambar = $request->file('gambar_event');
+                $nama_gambar = time()."_".$gambar->getClientOriginalName();
+                // isi nama dengan nama folder tempat kemana kamu file diupload
+                $tujuan_upload = 'event';
+                $gambar->move($tujuan_upload,$nama_gambar);
+                if(file_exists('event/'.$data_event->gambar_event)){
+                    //lokasi public/event
+                    //skrip untuk menghapus gambar ketika di update
+                unlink('event/'.$data_event->gambar_event);
+                }
+                $data_event->gambar_event=$nama_gambar;
+            }
+        
+            $data_event->deskripsi_event=$request->deskripsi_event;
+            $data_event->save();
+            if($data_event){
+                return redirect ('/event');
+            }  
     }
 
     /**
@@ -117,6 +164,8 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+        $event->delete();
+        return redirect("/event");
     }
 }

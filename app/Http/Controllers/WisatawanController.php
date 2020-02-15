@@ -134,7 +134,7 @@ class WisatawanController extends Controller
             'nama_wisatawan'=> 'required',
             'tanggal_lahir'=> 'required',
             'alamat'=> 'required',
-            'foto' => 'required',
+            'foto' => 'nullable',
             'telpon'=> 'required',
             ],$messages
         );

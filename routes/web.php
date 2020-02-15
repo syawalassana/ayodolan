@@ -15,6 +15,8 @@
 //      return view('objek_wisata');
 //});
 
+use App\Event;
+
 Route::get('/objekwisata','ObjekWisataController@index');
 Route::get('/', 'FrontController@index');
 
@@ -25,3 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/objek-wisata', 'ObjekWisataController');
 Route::resource('/wisatawan', 'WisatawanController');
 Route::resource('event', 'EventController');
+Route::get('/slider',function(){
+    return Event::where('tgl_mulai','<=',date('Y-m-d'))->where('tgl_selesai','>=',date('Y-m-d'))->get();
+
+});
