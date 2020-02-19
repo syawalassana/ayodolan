@@ -45,33 +45,33 @@ class EventController extends Controller
 
         ];
         $validator = Validator::make($request->all(),[
-            'nama_event'=> 'required', //data tidak boleh kosong
-            'lokasi' => 'required',
-            'gambar_event' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-            'deskripsi_event' => 'required',
+            'nama_mobil'=> 'required', //data tidak boleh kosong
+            'harga' => 'required',
+            'alamat' => 'required',
+            'foto_hotel' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'gmap'=> 'required',
+            'no_telpon' => 'required|numeric',
         ],$messages
     );
         if ($validator->fails()){
-          return redirect('/event/create')
+          return redirect('/hotel/create')
                     ->withErrors($validator)
                     ->withInput();
         }
-        $data_event = new Event;
-        $data_event->nama_event=$request->nama_event;
-        $data_event->tgl_event=$request->tgl_event;
-        $data_event->tgl_mulai=$request->tgl_mulai;
-        $data_event->tgl_selesai=$request->tgl_selesai;
-        $data_event->lokasi=$request->lokasi;
-        $gambar = $request->file('gambar_event');
+        $data_hotel = new Hotel;
+        $data_hotel->nama_hotel=$request->nama_hotel;
+        $data_hotel->harga=$request->harga;
+        $data_hotel->alamat=$request->alamat;
+        $gambar = $request->file('foto_hotel');
         $nama_gambar = time()."_".$gambar->getClientOriginalName();
-        $tujuan_upload = 'event';
+        $tujuan_upload = 'hotel';
 
         $gambar->move($tujuan_upload,$nama_gambar);
-        $data_event->gambar_event = $nama_gambar;
-        $data_event->deskripsi_event=$request->deskripsi_event;
-        $data_event->save();
-        if($data_event){
-            return redirect ('/event');
+        $data_hotel->foto_hotel = $nama_gambar;
+        $data_hotel->gmap=$request->gmap;
+        $data_hotel->save();
+        if($data_hotel){
+            return redirect ('/hotel');
         }
     }
 

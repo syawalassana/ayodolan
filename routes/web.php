@@ -26,8 +26,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/objek-wisata', 'ObjekWisataController');
 Route::resource('/wisatawan', 'WisatawanController');
-Route::resource('event', 'EventController');
+Route::resource('/event', 'EventController');
+Route::resource('/hotel', 'HotelController');
+Route::resource('/mobil', 'MobilController');
 Route::get('/slider',function(){
     return Event::where('tgl_mulai','<=',date('Y-m-d'))->where('tgl_selesai','>=',date('Y-m-d'))->get();
 
 });
+
