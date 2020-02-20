@@ -15,22 +15,20 @@
       <table class="table table-bordered">
       <tr>
         <th>No</th>
-        <th>Nama Wisatawan</th>
-        <th>Tanggal Lahir</th>
-        <th>Alamat</th>
-        <th>Foto</th>
-        <th>Telpon</th>
+        <th>Nama Mobil</th>
+        <th>Kapasitas</th>
+        <th>Harga Sewa Mobil</th>
+        <th>Foto Mobil</th>
         <th colspan="2">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
       <tr>
       <td>{{$key+1}}</td>
-        <td>{{$row->user->name}}</td>
-        <td>{{$row->tanggal_lahir}}</td>
-        <td>{{$row->alamat}}</td>
-        <td><img width="100" src="/fotowisatawan/{{$row->foto }}"/></td>
-        <td>{{$row->telpon}}</td>
-        <td><a class="btn btn-warning" href="/wisatawan/{{$row->id}}/edit">Update</a></td>
+        <td>{{$row->nama_mobil}}</td>
+        <td>{{$row->harga_sewa}}</td>
+        <td>{{$row->kapasitas}}</td>
+        <td><img width="100" src="/mobil/{{$row -> foto_mobil}}"/></td>
+        <td><a class="btn btn-warning" href="/mobil/{{$row->id}}/edit">Update</a></td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/wisatawan/{{$row->id}}" method="post">
             @csrf

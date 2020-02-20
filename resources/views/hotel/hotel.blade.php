@@ -31,7 +31,7 @@
         <td>{{$row->alamat}}</td>
         <td><img width="100" src="/hotel/{{$row->foto_hotel }}"/></td>
         <td>{{$row->gmap}}</td>
-        <td>{{$row->no_telpon}}</td>
+        <td>{{$row->no_telepon}}</td>
         <td><a class="btn btn-warning" href="/hotel/{{$row->id}}/edit">Update</a></td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/hotel/{{$row->id}}" method="post">

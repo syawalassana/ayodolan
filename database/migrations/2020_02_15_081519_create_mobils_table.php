@@ -18,6 +18,7 @@ class CreateMobilsTable extends Migration
             $table->string('nama_mobil');
             $table->integer('kapasitas');
             $table->integer('harga_sewa');
+            $table->string('foto_mobil');
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@
 @endif
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Form Objek Wisata</h3>
+    <h3 class="box-title">Form Data Hotel</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
@@ -31,31 +31,34 @@
     <div class="box-body">
       <div class="form-group">
         <label>Nama Hotel</label>
-        <input type="text" name="nama_hotel" value="{{$data->nama_wisata}}" class="form-control"  placeholder="Masukan Nama">
+        <input type="text" name="nama_hotel" value="{{$data->nama_hotel}}" class="form-control"  placeholder="Masukan Nama Hotel">
       </div>
+    </div>
+    <div class="form-group">
+      <label>Alamat Hotel</label>
+      <input type="text" name="alamat" value="{{$data->alamat}}" class="form-control" placeholder="Ubah Alamat Hotel">
+    </div>
       <div class="form-group">
-        <label>Lokasi Wisata</label>
-        <input type="text" name="lokasi" value="{{$data->lokasi}}" class="form-control" name="lokasi" placeholder="Lokasi Objek Wisata">
-      </div>
+            <label>Harga Tiket per/malam</label>
+            <input type="text" name="harga" value="{{$data->harga}}" placeholder="Ubah Harga tiket" class="form-control">
       <div class="form-group">
-        <label>Harga Tiket</label>
-        <input type="text" name="harga" value="{{$data->harga}}" placeholder="Masukan Harga" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Gambar Objek Wisata</label>
+        <label>Foto Hotel</label>
         <br/>
-        <img width="100" src="/objekwisata/{{$data->gambar}}"/>
-        <input input type="file" name="gambar" >
+        <img width="100" src="/hotel/{{$data->foto_hotel}}"/>
+        <input input type="file" name="foto_hotel" >
       </div>
       <div class="form-group">
-        <label>Diskripsi Objek Wisata</label>
-        <textarea name="deskripsi" class="form-control" placeholder="Masukan Diskripsi" >{{$data->deskripsi}}</textarea>
+        <label>Google Map</label>
+        <textarea name="gmap" class="form-control" placeholder="Ubah Nomor Telepon" >{{$data->gmap}}</textarea>
       </div>
-      
+      <div class="form-group">
+        <label>No Telepon Hotel</label>
+        <textarea name="no_telepon" class="form-control" placeholder="Ubah No Telepon Hotel" >{{$data->no_telepon}}</textarea>
+      </div>
     </div>
     <div class="box-footer">
     <input class="btn btn-primary" type="submit" value="Update">
-       <a href="/objek-wisata"><button type="button">Kembali</button></a>
+       <a href="/hotel"><button type="button">Kembali</button></a>
     </div>
   </form>
 </div>

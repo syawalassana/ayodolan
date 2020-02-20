@@ -98,9 +98,7 @@ class ObjekWisataController extends Controller
     public function edit($id)
     {
         $objekWisata=ObjekWisata::find($id);
-
-
-        return view('objekwisata.objek_wisata_edit', ['data'=>$objekWisata]);
+        return view('objekwisata.objek_wisata_edit',['data'=>$objekWisata]);
 
     }
 

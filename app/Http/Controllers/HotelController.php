@@ -14,7 +14,7 @@ class HotelController extends Controller
     public function index()
     {
         $items=[
-            'data'=> Hotel::orderBy('nama_hotel')->paginate()
+            'data'=>Hotel::orderBy('nama_hotel')->paginate()
         ];
         return view('hotel.hotel', $items);
     }
@@ -79,9 +79,9 @@ class HotelController extends Controller
      * @param  \App\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function show(Hotel $id)
+    public function show($id)
     {
-        
+        return $id;
     }
 
     /**
@@ -90,9 +90,9 @@ class HotelController extends Controller
      * @param  \App\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hotel  $id)
+    public function edit($id)
     {
-      $hotel = Hotel::find($id);
+      $hotel=Hotel::find($id);
       return view('hotel.hotel_edit',['data'=>$hotel]);
     }
     /**
@@ -115,11 +115,11 @@ class HotelController extends Controller
             'alamat' => 'required',
             'foto_hotel' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
             'gmap' => 'required',
-            'no_telpon' => 'required'
+            'no_telepon' => 'required'
         ],$messages
     );
         if ($validator->fails()){
-          return redirect('/hotel/create')
+          return redirect('hotel/'.$id.'/edit')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -141,6 +141,7 @@ class HotelController extends Controller
             $data_hotel->foto_hotel=$nama_gambar;
         }
         $data_hotel->gmap=$request->gmap;
+        $data_hotel->no_telepon=$request->no_telepon; 
         $data_hotel->save();
         if($data_hotel){
             return redirect ('/hotel');
@@ -152,8 +153,10 @@ class HotelController extends Controller
      * @param  \App\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hotel $hotel)
+    public function destroy($id)
     {
-        //
+        $event = Hotel::find($id);
+        $event->delete();
+        return redirect("/hotel");
     }
 }

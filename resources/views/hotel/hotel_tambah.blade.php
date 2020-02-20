@@ -39,7 +39,7 @@
         <input type="text" name="gmap" value="{{old('gmap')}}" class="form-control" placeholder="GMAP">
       </div>
       <div class="form-group">
-        <label>No Telpon Hotel</label>
+        <label>No Telepon Hotel</label>
         <input type="text" name="no_telepon" value="{{old('no_telepon')}}" class="form-control" placeholder="Masukan No Telepon Hotel" ></textarea>
       </div>
       
