@@ -14,7 +14,7 @@ class PaketController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

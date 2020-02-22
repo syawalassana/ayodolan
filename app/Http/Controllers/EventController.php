@@ -61,6 +61,7 @@ class EventController extends Controller
         $data_event->tgl_event=$request->tgl_event;
         $data_event->tgl_mulai=$request->tgl_mulai;
         $data_event->tgl_selesai=$request->tgl_selesai;
+        $data_event->lokasi=$request->lokasi;
         $gambar = $request->file('gambar_event');
 		$nama_gambar = time()."_".$gambar->getClientOriginalName();
       	// isi dengan nama folder tempat kemana file diupload

@@ -24,7 +24,7 @@
       </div>
       <div class="form-group">
         <label>Kapasitas Mobil</label>
-        <input type="text" name="kapasitas" value="{{old('kapasitas')}}" class="form-control" placeholder="Kapasitas Mobil">
+        <input type="text" name="kapasitas" value="{{old('kapasitas')}}" class="form-control"    placeholder="Kapasitas Mobil">
       </div>
       <div class="form-group">
         <label>Harga Sewa Mobil</label>
