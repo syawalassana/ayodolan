@@ -38,7 +38,7 @@
         <input type="text" name="lokasi" value="{{$data->lokasi}}" class="form-control" name="lokasi" placeholder="Lokasi Objek Wisata">
       </div>
       <div class="form-group">
-        <label>Harga Tiket</label>
+        <label>Harga Tiket Masuk</label>
         <input type="text" name="harga" value="{{$data->harga}}" placeholder="Masukan Harga" class="form-control">
       </div>
       <div class="form-group">
@@ -46,6 +46,18 @@
         <br/>
         <img width="100" src="/objekwisata/{{$data->gambar}}"/>
         <input input type="file" name="gambar" >
+      </div>
+      <div class="form-group">
+        <label>Tipe Objek Wisata</label>
+        <select name="tipe_wisata" class="form-control">
+            <option value="Pantai">Pantai</option>
+            <option value="Gunung">Gunung</option>
+            <option value="Goa">Goa</option>    
+        </select>
+      </div>
+      <div class="form-group">
+            <label>Ciri Khas</label>
+            <input type="text" name="ciri_khas" value="{{$data->ciri_khas}}" placeholder="Ciri Khas" class="form-control">
       </div>
       <div class="form-group">
         <label>Diskripsi Objek Wisata</label>

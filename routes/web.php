@@ -29,6 +29,7 @@ Route::resource('/wisatawan', 'WisatawanController');
 Route::resource('/event', 'EventController');
 Route::resource('/hotel', 'HotelController');
 Route::resource('/mobil', 'MobilController');
+Route::resource('/paket', 'PaketController');
 Route::get('/slider',function(){
     return Event::where('tgl_mulai','<=',date('Y-m-d'))->where('tgl_selesai','>=',date('Y-m-d'))->get();
 

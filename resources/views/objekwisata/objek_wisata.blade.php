@@ -12,13 +12,16 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
+        <div class="table-responsive">
       <table class="table table-bordered">
       <tr>
         <th>No</th>
         <th>Nama Wisata</th>
         <th>Lokasi</th>
-        <th>Harga</th>
+        <th>Harga Tiket Masuk</th>
         <th>Gambar</th>
+        <th class>Tipe</th>
+        <th class="col-xs-2">Ciri Khas Objek Wisata</th>
         <th>Diskripsi</th>
         <th colspan="2">OPSI</th>
       </tr>
@@ -29,6 +32,8 @@
         <td>{{$row -> lokasi}}</td>
         <td>{{$row -> harga}}</td>
         <td><img width="100" src="/objekwisata/{{$row -> gambar }}"/></td>
+        <td>{{$row -> tipe_wisata}}</td>
+        <td>{{$row -> ciri_khas}}</td>
         <td>{{$row -> deskripsi}}</td>
         <td><a class="btn btn-warning" href="/objek-wisata/{{$row->id}}/edit">Update</a></td>
         <td>
@@ -41,6 +46,7 @@
       </tr>
       @endforeach
       </table>
+        </div>
     </div>
     <!-- /.box-body -->
     <div class="box-footer clearfix">
@@ -48,10 +54,4 @@
     </div>
   </div>
 
-
-
-
-    <table border="1">
-     
-    </table>
 @endsection

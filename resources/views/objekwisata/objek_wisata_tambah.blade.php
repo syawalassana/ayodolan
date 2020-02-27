@@ -24,16 +24,28 @@
       </div>
       <div class="form-group">
         <label>Lokasi Wisata</label>
-        <input type="text" name="lokasi" value="{{old('lokasi')}}" class="form-control" name="lokasi" placeholder="Lokasi Objek Wisata">
+        <input type="text" name="lokasi" value="{{old('lokasi')}}" class="form-control" placeholder="Lokasi Objek Wisata">
       </div>
       <div class="form-group">
-        <label>Harga Tiket</label>
+        <label>Harga Tiket Masuk</label>
         <input type="text" name="harga" value="{{old('harga')}}" placeholder="Masukan Harga" class="form-control">
       </div>
       <div class="form-group">
         <label>Gambar Objek Wisata</label>
         <input input type="file" name="gambar">
       </div>
+      <div class="form-group">
+            <label>Diskripsi Objek Wisata</label>
+            <select name="tipe_wisata" class="form_control">
+                <option value="Pantai"{{old('tipe_wisata')=='Pantai'?'selected':''}}>Pantai</option>
+                <option value="Gunung"{{old('tipe_wisata')=='Gunung'?'selected':''}}>Gunung</option>
+                <option value="Goa"{{old('tipe_wisata')=='Goa'?'selected':''}}>Goa</option>
+             </select>
+     </div>
+     <div class="form-group">
+            <label>Ciri Khas Objek Wisata</label>
+            <input type="text" name="ciri_khas" value="{{old('ciri_khas')}}" class="form-control" placeholder="Ciri Khas Objek Wisata">
+    </div>   
       <div class="form-group">
         <label>Diskripsi Objek Wisata</label>
         <textarea name="deskripsi" class="form-control" placeholder="Masukan Diskripsi" >{{old('deskripsi')}}</textarea>
