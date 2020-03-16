@@ -85,7 +85,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -168,4 +168,13 @@ class EventController extends Controller
         $event->delete();
         return redirect("/event");
     }
+    public function tambah_gambar($id)
+    {
+        
+        $items=[
+            'data'=>Event::find($id)
+        ];
+        return view ('event.tambah_gambar', $items);
+    }
 }
+

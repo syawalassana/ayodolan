@@ -8,4 +8,7 @@ class Event extends Model
 {
     protected $table = 'event';
     
+    public function gambarevent(){
+        return $this->hasMany('App/GambarEvent', 'gambarevent_id');
+    }
 }

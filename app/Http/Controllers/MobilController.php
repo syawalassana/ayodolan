@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GambarMobil;
 use App\Hotel;
 use App\Mobil;
 use Illuminate\Http\Request;
@@ -78,9 +79,13 @@ class MobilController extends Controller
      * @param  \App\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function show(Mobil $mobil)
+    public function show ($id)
     {
-        //
+       $items=[
+            'data'=>Mobil::find($id),
+            'gambarmobil'=>GambarMobil::where('mobil_id', $id)->get()
+        ];
+        return view('mobil.mobil_detail',$items);
     }
 
     /**
@@ -155,5 +160,14 @@ class MobilController extends Controller
         $mobil = Mobil::find($id);
         $mobil->delete();
         return redirect("/mobil");
+    }
+    
+    public function tambah_gambar($id)
+    {
+        
+        $items=[
+            'data'=>Mobil::find($id)
+        ];
+        return view ('mobil.tambah_gambar', $items);
     }
 }

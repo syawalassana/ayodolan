@@ -18,8 +18,7 @@
         <th>Nama Mobil</th>
         <th>Kapasitas</th>
         <th>Harga Sewa Mobil</th>
-        <th>Foto Mobil</th>
-        <th colspan="2">OPSI</th>
+        <th class="text-center" colspan="3">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
       <tr>
@@ -27,8 +26,8 @@
         <td>{{$row->nama_mobil}}</td>
         <td>{{$row->harga_sewa}}</td>
         <td>{{$row->kapasitas}}</td>
-        <td><img width="100" src="/mobil/{{$row -> foto_mobil}}"/></td>
         <td><a class="btn btn-warning" href="/mobil/{{$row->id}}/edit">Update</a></td>
+        <td><a class="btn btn-info" href="/mobil/{{$row->id}}">Detail</a></td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/wisatawan/{{$row->id}}" method="post">
             @csrf

@@ -35,7 +35,7 @@
         <input input type="file" name="gambar">
       </div>
       <div class="form-group">
-            <label>Diskripsi Objek Wisata</label>
+            <label>Tipe Objek Wisata</label>
             <select name="tipe_wisata" class="form_control">
                 <option value="Pantai"{{old('tipe_wisata')=='Pantai'?'selected':''}}>Pantai</option>
                 <option value="Gunung"{{old('tipe_wisata')=='Gunung'?'selected':''}}>Gunung</option>

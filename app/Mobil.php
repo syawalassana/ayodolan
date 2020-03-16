@@ -12,6 +12,10 @@ public function paket(){
     
     return $this->hasMany('App/Paket','paket_id');
 }
+public function mobildetail(){
+
+    return $this->hasMany('App/GambarMobil','gambarmobil_id');
+}
 
 }
 

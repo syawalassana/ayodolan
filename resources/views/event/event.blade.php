@@ -35,6 +35,7 @@
         <td><img width="100" src="/event/{{$row -> gambar_event }}"/></td>
         <td>{{$row -> deskripsi_event}}</td>
         <td><a class="btn btn-warning" href="/event/{{$row->id}}/edit">Update</a></td>
+        <td><a class="btn btn-info" href="/event/{{$row->id}}">Detail</a></td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/event/{{$row->id}}" method="post">
             @csrf
