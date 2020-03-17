@@ -17,11 +17,7 @@
         <th>No</th>
         <th>Nama Event</th>
         <th>Tanggal Event</th>
-        <th>Tanggal Mulai Event</th>
-        <th>Tanggal Selesai Event</th>
         <th>Lokasi</th>
-        <th>Gambar Event</th>
-        <th>Deskripsi Event</th>
         <th colspan="2">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
@@ -29,11 +25,7 @@
       <td>{{$key+1}}</td>
         <td>{{$row -> nama_event}}</td>
         <td>{{$row -> tgl_event}}</td>
-        <td>{{$row -> tgl_mulai}}</td>
-        <td>{{$row -> tgl_selesai}}</td>
         <td>{{$row -> lokasi}}</td>
-        <td><img width="100" src="/event/{{$row -> gambar_event }}"/></td>
-        <td>{{$row -> deskripsi_event}}</td>
         <td><a class="btn btn-warning" href="/event/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/event/{{$row->id}}">Detail</a></td>
         <td>

@@ -14,7 +14,7 @@
     <div class="box-body">
       <table class="table table-bordered">
       <tr>
-        <th>Nama Mobil</th>
+        <th>Nama Event</th>
         <td>{{$data->nama_event}}</td>
       </tr>
       <tr>

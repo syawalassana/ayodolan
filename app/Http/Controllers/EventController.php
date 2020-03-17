@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\GambarEvent;
 
 class EventController extends Controller
 {
@@ -85,7 +86,11 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        
+        $items=[
+            'data'=>Event::find($id),
+            'gambarevent' => GambarEvent::where('event_id', $id)->get()
+        ];
+        return view('event.event_detail',$items);
     }
 
     /**

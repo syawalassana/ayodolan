@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\GambarEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class GambarEventController extends Controller
 {
@@ -49,16 +51,17 @@ class GambarEventController extends Controller
                     ->withErrors($validator)
                     ->withInput();
     }
+    //return $request->all();
     $gambardetail = new GambarEvent();
     $gambar = $request->file('gambar_event');
     $nama_gambar = time()."_".$gambar->getClientOriginalName();
     $tujuan_upload = 'event';
     $gambar->move($tujuan_upload,$nama_gambar);
     $gambardetail->path = $tujuan_upload.'/'.$nama_gambar;
-    $gambardetail->mobil_id=$request->mobil_id;
+    $gambardetail->event_id=$request->event_id;
     $gambardetail->save();
     if($gambardetail){
-        return redirect('event/'.$request->mobil_id);
+        return redirect('event/'.$request->event_id);
     }
 }
 
@@ -102,9 +105,10 @@ class GambarEventController extends Controller
      * @param  \App\GambarEvent  $gambarEvent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GambarEvent $gambarEvent)
+    public function destroy($id)
     {
-        $gambarevent= GambarEvent::find($id);
+        
+        $gambarevent = GambarEvent::find($id);
         $event_id=$gambarevent->event_id;
         
         if(file_exists($gambarevent->path)){
