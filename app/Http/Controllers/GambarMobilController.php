@@ -107,7 +107,7 @@ class GambarMobilController extends Controller
      */
     public function destroy($id)
     {
-            $gambarmobil= GambarMobil::find($id);
+            $gambarmobil = GambarMobil::find($id);
             $mobil_id=$gambarmobil->mobil_id;
             
             if(file_exists($gambarmobil->path)){

@@ -17,7 +17,7 @@
   <!-- form start -->
   <form action="/event-gambar/" method="post" enctype="multipart/form-data">
   @csrf
-    <input type="hidden" value="{{$data->id}}" name="id">
+    <input type="hidden" value="{{$data->id}}" name="event_id">
     <div class="box-body">
       <div class="form-group">
         <label>Foto Event</label>
