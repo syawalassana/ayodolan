@@ -37,6 +37,9 @@ Route::delete('mobil-gambar/{id}','GambarMobilController@destroy');
 Route::get('/event-gambar/{id}','EventController@tambah_gambar');
 Route::post('event-gambar','GambarEventController@store');
 Route::delete('event-gambar/{id}','GambarEventController@destroy');
+Route::get('/objek_wisata-gambar/{id}','ObjekWisataController@tambah_gambar');
+Route::post('objek_wisata-gambar','GambarWisataController@store');
+Route::delete('objek_wisata-gambar/{id}','GambarWisataController@destroy');
 Route::get('/slider',function(){
     return Event::where('tgl_mulai','<=',date('Y-m-d'))->where('tgl_selesai','>=',date('Y-m-d'))->get();
 

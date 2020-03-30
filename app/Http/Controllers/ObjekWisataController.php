@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GambarWisata;
 use App\ObjekWisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -89,8 +90,11 @@ class ObjekWisataController extends Controller
      */
     public function show($id)
     {
-        //
-        return $id;
+        $items=[
+            'data'=>ObjekWisata::find($id),
+            'gambarwisata'=>GambarWisata::where('obj_wisata_id', $id)->get()
+        ];
+        return view('objekwisata.objek_wisata_detail',$items);
     }
 
     /**
@@ -175,8 +179,13 @@ class ObjekWisataController extends Controller
         return redirect("/objek-wisata");
     }
 
-    public function testing(){
-
+    public function tambah_gambar($id)
+    {
+        
+        $items=[
+            'data'=>ObjekWisata::find($id)
+        ];
+        return view ('objekwisata.tambah_gambar', $items);
     }
 
 }
