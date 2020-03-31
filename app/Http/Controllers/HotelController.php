@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GambarHotel;
 use App\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -81,7 +82,11 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        return $id;
+        $items=[
+            'data'=>Hotel::find($id),
+            'gambarhotel'=>GambarHotel::where('hotel_id', $id)->get()
+        ];
+        return view('hotel.hotel_detail',$items);
     }
 
     /**
@@ -158,5 +163,13 @@ class HotelController extends Controller
         $event = Hotel::find($id);
         $event->delete();
         return redirect("/hotel");
+    }
+
+    public function tambah_gambar($id)
+    {
+        $items=[
+            'data'=>Hotel::find($id)
+        ];
+        return view ('hotel.tambah_gambar', $items);
     }
 }

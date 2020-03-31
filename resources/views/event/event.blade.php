@@ -18,7 +18,7 @@
         <th>Nama Event</th>
         <th>Tanggal Event</th>
         <th>Lokasi</th>
-        <th colspan="2">OPSI</th>
+        <th class="text-center" colspan="3">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
       <tr>

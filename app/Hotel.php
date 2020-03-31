@@ -11,4 +11,8 @@ class Hotel extends Model
     public function paket(){
         return $this->hasMany('App/Paket','paket_id');
     }
+
+    public function hoteldetail(){
+        return $this->hasMany('App/GambarHotel','gambarhotel_id');
+    }
 }

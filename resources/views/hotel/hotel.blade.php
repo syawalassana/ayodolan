@@ -16,23 +16,16 @@
       <tr>
         <th>No</th>
         <th>Nama hotel</th>
-        <th>harga</th>
         <th>Alamat</th>
-        <th>Foto</th>
-        <th>gmap</th>
-        <th>No Telepon</th>
-        <th colspan="2">OPSI</th>
+        <th class="text-center" colspan="3">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
       <tr>
       <td>{{$key+1}}</td>
         <td>{{$row->nama_hotel}}</td>
-        <td>{{$row->harga}}</td>
-        <td>{{$row->alamat}}</td>
-        <td><img width="100" src="/hotel/{{$row->foto_hotel }}"/></td>
         <td>{{$row->gmap}}</td>
-        <td>{{$row->no_telepon}}</td>
         <td><a class="btn btn-warning" href="/hotel/{{$row->id}}/edit">Update</a></td>
+        <td><a class="btn btn-info" href="/hotel/{{$row->id}}">Detail</a></td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/hotel/{{$row->id}}" method="post">
             @csrf
