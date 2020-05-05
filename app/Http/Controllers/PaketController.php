@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Paket;
+use App\PaketDetail;
 use Illuminate\Http\Request;
 
 class PaketController extends Controller
@@ -88,9 +89,13 @@ class PaketController extends Controller
      * @param  \App\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function show(Paket $paket)
+    public function show($id)
     {
-        return $id;
+        $items=[
+            'data'=>Paket::find($id),
+            'paketdetail'=>PaketDetail::where('paket_id', $id)->get()
+        ];
+        return view('paket.paket_detail',$items);
     }
 
     /**
@@ -129,6 +134,9 @@ class PaketController extends Controller
             'lama_liburan' => 'required',
             'harga_supir' => 'required|numeric',
             'harga_tour_guide' => 'required|numeric',
+            'obj_wisata_id' => 'required',
+            'gambar_paket' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'lama_kunjungan' => 'required',
         ],$messages
     );
         if ($validator->fails()){
@@ -162,7 +170,12 @@ class PaketController extends Controller
     $data_paket->harga_supir=$request->harga_supir;
     $data_paket->harga_tour_guide=$request->harga_tour_guide;  
     $data_paket->save();
-    if($data_paket){
+    $data_paketdetail= new PaketDetail;
+    $data_paketdetail->id=$request->id;
+    $data_paketdetail->obj_wisata_id=$request->obj_wisata_id;
+    $data_paketdetail->lama_kunjungan=$request->lama_kunjungan;
+    $data_paketdetail->save();
+    if($data_paket&&$data_paketdetail){
         return redirect('/paket');
     }
 

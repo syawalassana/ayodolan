@@ -29,13 +29,14 @@
         <th>Deskripsi</th>
         <td>{{$data->deskripsi}}</td>
       </tr>
+
     </table>
     </div>
     <!-- /.box-body -->
 </div>
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Gambar Mobil</h3>
+      <h3 class="box-title">Gambarrrr Mobil</h3>
       <div class="box-tools">
         <div class="form-group">
           <a class="btn btn-success" href="/objek_wisata-gambar/{{$data->id}}"> <i class="fa fa-plus"></i>Tambah Gambar</a>

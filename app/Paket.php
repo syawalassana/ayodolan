@@ -15,4 +15,8 @@ class Paket extends Model
     {
         return $this->belongsTo('App\Hotel','hotel_id');
     }
+    public function PaketDetail(){
+        return $this->belongsTo('App\Paket','paket_detail_id');
+    }
+    
 }

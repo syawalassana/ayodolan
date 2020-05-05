@@ -17,5 +17,6 @@ public function mobildetail(){
     return $this->hasMany('App/GambarMobil','gambarmobil_id');
 }
 
+
 }
 

@@ -36,33 +36,9 @@ class PaketDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        {
-            $messages = [
-                'required' => ':attribute Tidak Boleh Kosong',
-                'numeric' => ':attribute harus angka',
-    
-            ];
-            $validator = Validator::make($request->all(),[
-                'nama_wisata'=> 'required', //data tidak boleh kosong
-                'obj_wisata_id' => 'required',
-                'harga' => 'numeric|required',
-                'gambar_paket' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-                'lama_kunjungan' => 'required',
-            ],$messages
-        );
-            if ($validator->fails()){
-              return redirect('/paket/create')
-                        ->withErrors($validator)
-                        ->withInput();
-            }
-        $data_paketdetail=new PaketDetail;
-        $data_paketdetail->$id=$request->id;
-        $data_paketdetail->$obj_wisata_id=$request->obj_wisata_id;
-        $data_paketdetail->$lama_kunjungan=$request->lama_kunjungan;
+    public function store(Request $request, $id)
+    {   
     }
-}
 
     /**
      * Display the specified resource.
