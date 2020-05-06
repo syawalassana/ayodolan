@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\GambarMobil;
-use App\Hotel;
 use App\Mobil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,10 +16,11 @@ class MobilController extends Controller
      */
     public function index()
     {
-        $items=[
-            'data'=>Mobil::orderBy('nama_mobil')->paginate()
+        $items = [
+            'data' => Mobil::orderBy('nama_mobil')->paginate(),
         ];
-        return view('mobil.mobil',$items);
+
+        return view('mobil.mobil', $items);
     }
 
     /**
@@ -41,51 +41,51 @@ class MobilController extends Controller
      */
     public function store(Request $request)
     {
-        $messages=[
+        $messages = [
             'required' => ':attribute Tidak Boleh Kosong',
             'numeric' => ':attribute harus angka',
         ];
-        $validator = Validator::make($request->all(),[
-            'nama_mobil'=> 'required', //data tidak boleh kosong
+        $validator = Validator::make($request->all(), [
+            'nama_mobil' => 'required', //data tidak boleh kosong
             'kapasitas' => 'required',
             'harga_sewa' => 'required|numeric',
             'foto_mobil' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-        ],$messages
+        ], $messages
     );
-    if ($validator->fails()){
-        return redirect('/mobil/create')
+        if ($validator->fails()) {
+            return redirect('/mobil/create')
                   ->withErrors($validator)
                   ->withInput();
-    }
-    $data_mobil = new Mobil;
-    $data_mobil->nama_mobil=$request->nama_mobil;
-    $data_mobil->kapasitas=$request->kapasitas;
-    $data_mobil->harga_sewa=$request->harga_sewa;
-    $gambar = $request->file('foto_mobil');
-    $nama_gambar = time()."_".$gambar->getClientOriginalName();
-    $tujuan_upload = 'mobil';
-    $gambar->move($tujuan_upload,$nama_gambar);
-    $data_mobil->foto_mobil = $nama_gambar;
-    $data_mobil->save();
-    if($data_mobil){
-        return redirect('/mobil');
-    }
-
+        }
+        $data_mobil = new Mobil;
+        $data_mobil->nama_mobil = $request->nama_mobil;
+        $data_mobil->kapasitas = $request->kapasitas;
+        $data_mobil->harga_sewa = $request->harga_sewa;
+        $gambar = $request->file('foto_mobil');
+        $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
+        $tujuan_upload = 'mobil';
+        $gambar->move($tujuan_upload, $nama_gambar);
+        $data_mobil->foto_mobil = $nama_gambar;
+        $data_mobil->save();
+        if ($data_mobil) {
+            return redirect('/mobil');
+        }
     }
 
     /**
-         * Display the specified resource.
+     * Display the specified resource.
      *
      * @param  \App\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function show ($id)
+    public function show($id)
     {
-       $items=[
-            'data'=>Mobil::find($id),
-            'gambarmobil'=>GambarMobil::where('mobil_id', $id)->get()
+        $items = [
+            'data' => Mobil::find($id),
+            'gambarmobil' => GambarMobil::where('mobil_id', $id)->get(),
         ];
-        return view('mobil.mobil_detail',$items);
+
+        return view('mobil.mobil_detail', $items);
     }
 
     /**
@@ -96,9 +96,9 @@ class MobilController extends Controller
      */
     public function edit($id)
     {
-        $mobil=Mobil::find($id);
-        return view('mobil.mobil_edit',['data'=>$mobil]);
-        
+        $mobil = Mobil::find($id);
+
+        return view('mobil.mobil_edit', ['data' => $mobil]);
     }
 
     /**
@@ -110,44 +110,43 @@ class MobilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages=[
+        $messages = [
             'required' => ':attribute Tidak Boleh Kosong',
             'numeric' => ':attribute harus angka',
         ];
-        $validator = Validator::make($request->all(),[
-            'nama_mobil'=> 'required', //data tidak boleh kosong
+        $validator = Validator::make($request->all(), [
+            'nama_mobil' => 'required', //data tidak boleh kosong
             'kapasitas' => 'required',
             'harga_sewa' => 'required|numeric',
             'foto_hotel' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
-        ],$messages
+        ], $messages
     );
-    if ($validator->fails()){
-        return redirect('mobil/'.$id.'/edit')
+        if ($validator->fails()) {
+            return redirect('mobil/' . $id . '/edit')
                   ->withErrors($validator)
                   ->withInput();
-    }
-    $data_mobil = Mobil::find($id);
-    $data_mobil->nama_mobil=$request->nama_mobil;
-    $data_mobil->kapasitas=$request->kapasitas;
-    $data_mobil->harga_sewa=$request->harga_sewa;
-    if($request->has('foto_mobil')){
-        $gambar = $request->file('foto_mobil');
-        $nama_gambar = time()."_".$gambar->getClientOriginalName();
-        // isi nama dengan nama folder tempat kemana kamu file diupload
-        $tujuan_upload = 'mobil';
-        $gambar->move($tujuan_upload,$nama_gambar);
-        if(file_exists('mobil/'.$data_mobil->foto_mobil)){
-            //lokasi public/event
-            //skrip untuk menghapus gambar ketika di update
-        unlink('mobil/'.$data_mobil->foto_mobil);
         }
-        $data_mobil->foto_mobil=$nama_gambar;
-    }
-    $data_mobil->save();
-    if($data_mobil){
-        return redirect('/mobil');
-    }
-
+        $data_mobil = Mobil::find($id);
+        $data_mobil->nama_mobil = $request->nama_mobil;
+        $data_mobil->kapasitas = $request->kapasitas;
+        $data_mobil->harga_sewa = $request->harga_sewa;
+        if ($request->has('foto_mobil')) {
+            $gambar = $request->file('foto_mobil');
+            $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
+            // isi nama dengan nama folder tempat kemana kamu file diupload
+            $tujuan_upload = 'mobil';
+            $gambar->move($tujuan_upload, $nama_gambar);
+            if (file_exists('mobil/' . $data_mobil->foto_mobil)) {
+                //lokasi public/event
+                //skrip untuk menghapus gambar ketika di update
+                unlink('mobil/' . $data_mobil->foto_mobil);
+            }
+            $data_mobil->foto_mobil = $nama_gambar;
+        }
+        $data_mobil->save();
+        if ($data_mobil) {
+            return redirect('/mobil');
+        }
     }
     /**
      * Remove the specified resource from storage.
@@ -158,28 +157,28 @@ class MobilController extends Controller
     public function destroy($id)
     {
         $mobil = Mobil::find($id); //mencari data berdasarkan id pada model mobil
-        $mobil_detail=GambarMobil::where('mobil_id',$mobil->id)->get(); //mencari data relasi dari data mobil pada table gambar_mobil
-        foreach($mobil_detail as $md){
-            if(file_exists($md->path)){ //pengecekan apakah datanya ada berdasarkan lokasi filenya.
+        $mobil_detail = GambarMobil::where('mobil_id', $mobil->id)->get(); //mencari data relasi dari data mobil pada table gambar_mobil
+        foreach ($mobil_detail as $md) {
+            if (file_exists(public_path() . $md->path)) { //pengecekan apakah datanya ada berdasarkan lokasi filenya.
                 //skrip untuk menghapus data foto lama yang di update
-            unlink($md->path);  //proses menghapus gambar berdasarkan lokasi file  
+            unlink($md->path);  //proses menghapus gambar berdasarkan lokasi file
             }
             $md->delete(); //menghapus data dari database pada table gambar mobil
         }
-        if(file_exists('mobil/'.$mobil->foto_mobil)){ //pengecekan data gambar pada table mobil
+        if (file_exists(public_path() . 'mobil/' . $mobil->foto_mobil)) { //pengecekan data gambar pada table mobil
             //skrip untuk menghapus data foto lama yang di update
-        unlink('mobil/'.$mobil->foto_mobil);    //proses menhapus yang ada pada table mobil
+            unlink('mobil/' . $mobil->foto_mobil);    //proses menhapus yang ada pada table mobil
         }
         $mobil->delete(); //proses hapus dari database
-        return redirect("/mobil");
+        return redirect('/mobil');
     }
-    
+
     public function tambah_gambar($id)
     {
-        
-        $items=[
-            'data'=>Mobil::find($id)
+        $items = [
+            'data' => Mobil::find($id),
         ];
-        return view ('mobil.tambah_gambar', $items);
+
+        return view('mobil.tambah_gambar', $items);
     }
 }
