@@ -14,7 +14,7 @@ public function paket(){
 }
 public function mobildetail(){
 
-    return $this->hasMany('App/GambarMobil','gambarmobil_id');
+    return $this->hasMany('App/GambarMobil','mobil_id');
 }
 
 

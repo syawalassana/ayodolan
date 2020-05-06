@@ -174,7 +174,19 @@ class ObjekWisataController extends Controller
      */
     public function destroy($id)
     {
-        $objekwisata = ObjekWisata::find($id);
+        $objekwisata = ObjekWisata::find($id); //mencari data berdasarkan id pada model mobil
+        $objekwisata_detail=GambarWisata::where('obj_wisata_id',$objekwisata->id)->get(); //mencari data relasi dari data mobil pada table gambar_mobil
+        foreach($objekwisata_detail as $wisatadetail){
+            if(file_exists($wisatadetail->path)){ //pengecekan apakah datanya ada berdasarkan lokasi filenya.
+                //skrip untuk menghapus data foto lama yang di update
+            unlink($wisatadetail->path);  //proses menghapus gambar berdasarkan lokasi file  
+            }
+            $wisatadetail->delete(); //menghapus data dari database pada table gambar mobil
+        }
+        if(file_exists('objekwisata/'.$objekwisata->gambar)){ //pengecekan data gambar pada table mobil
+            //skrip untuk menghapus data foto lama yang di update
+        unlink('objekwisata/'.$objekwisata->gambar);    //proses menhapus yang ada pada table mobil
+        }
         $objekwisata->delete();
         return redirect("/objek-wisata");
     }

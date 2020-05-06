@@ -18,6 +18,7 @@
         <th>No</th>
         <th>Nama Wisata</th>
         <th>Lokasi</th>
+        <th>Foto</th>
         <th class="text-center" colspan="4">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
@@ -25,6 +26,7 @@
       <td>{{$key+1}}</td>
         <td>{{$row -> nama_wisata}}</td>
         <td>{{$row -> lokasi}}</td>
+        <td><img width="100" src="/objekwisata/{{$row->gambar}}"/></td>
         <td><a class="btn btn-warning" href="/objek-wisata/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/objek-wisata/{{$row->id}}">Detail</a></td>
         

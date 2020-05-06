@@ -59,7 +59,7 @@ class GambarWisataController extends Controller
     $gambardetail->obj_wisata_id=$request->obj_wisata_id;
     $gambardetail->save();
     if($gambardetail){
-        return redirect('objekwisata/'.$request->objek_wisata_id);
+        return redirect('objek-wisata/'.$request->obj_wisata_id);
     }
 }
 

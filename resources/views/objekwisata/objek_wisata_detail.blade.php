@@ -26,6 +26,14 @@
         <td>{{$data->harga}}</td>
       </tr>
       <tr>
+        <th>Tipe Wisata</th>
+        <td>{{$data->tipe_wisata}}</td>
+      </tr>
+      <tr>
+        <th>Ciri Khas</th>
+        <td>{{$data->ciri_khas}}</td>
+      </tr>
+      <tr>
         <th>Deskripsi</th>
         <td>{{$data->deskripsi}}</td>
       </tr>
@@ -36,7 +44,7 @@
 </div>
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Gambarrrr Mobil</h3>
+      <h3 class="box-title">Detail Gambar Objek Wisata</h3>
       <div class="box-tools">
         <div class="form-group">
           <a class="btn btn-success" href="/objek_wisata-gambar/{{$data->id}}"> <i class="fa fa-plus"></i>Tambah Gambar</a>

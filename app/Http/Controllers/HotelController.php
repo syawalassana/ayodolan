@@ -160,8 +160,20 @@ class HotelController extends Controller
      */
     public function destroy($id)
     {
-        $event = Hotel::find($id);
-        $event->delete();
+        $hotel = Hotel::find($id);//mencari data berdasarkan id pada model mobil
+        $hotel_detail=GambarHotel::where('hotel_id',$hotel->id)->get(); //mencari data relasi dari data mobil pada table gambar_mobil
+        foreach($hotel_detail as $hd){
+            if(file_exists($hd->path)){ //pengecekan apakah datanya ada berdasarkan lokasi filenya.
+                //skrip untuk menghapus data foto lama yang di update
+            unlink($hd->path);  //proses menghapus gambar berdasarkan lokasi file  
+            }
+            $hd->delete(); //menghapus data dari database pada table gambar mobil
+        }
+        if(file_exists('hotel/'.$hotel->foto_hotel)){ //pengecekan data gambar pada table mobil
+            //skrip untuk menghapus data foto lama yang di update
+        unlink('hotel/'.$hotel->foto_hotel);    //proses menhapus yang ada pada table mobil
+        }
+        $hotel->delete(); //proses hapus dari database
         return redirect("/hotel");
     }
 

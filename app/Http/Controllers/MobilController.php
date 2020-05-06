@@ -157,8 +157,20 @@ class MobilController extends Controller
      */
     public function destroy($id)
     {
-        $mobil = Mobil::find($id);
-        $mobil->delete();
+        $mobil = Mobil::find($id); //mencari data berdasarkan id pada model mobil
+        $mobil_detail=GambarMobil::where('mobil_id',$mobil->id)->get(); //mencari data relasi dari data mobil pada table gambar_mobil
+        foreach($mobil_detail as $md){
+            if(file_exists($md->path)){ //pengecekan apakah datanya ada berdasarkan lokasi filenya.
+                //skrip untuk menghapus data foto lama yang di update
+            unlink($md->path);  //proses menghapus gambar berdasarkan lokasi file  
+            }
+            $md->delete(); //menghapus data dari database pada table gambar mobil
+        }
+        if(file_exists('mobil/'.$mobil->foto_mobil)){ //pengecekan data gambar pada table mobil
+            //skrip untuk menghapus data foto lama yang di update
+        unlink('mobil/'.$mobil->foto_mobil);    //proses menhapus yang ada pada table mobil
+        }
+        $mobil->delete(); //proses hapus dari database
         return redirect("/mobil");
     }
     

@@ -159,7 +159,7 @@ class WisatawanController extends Controller
                 $foto = $request->file('foto');
                 $nama_foto = time()."_".$foto->getClientOriginalName();
                   // isi dengan nama folder tempat kemana file diupload
-                $tujuan_upload = 'wisatawan';
+                $tujuan_upload = 'fotowisatawan';
                 $foto->move($tujuan_upload,$nama_foto);
                 if(file_exists('wisatawan/'.$data_wisatawan->foto)){
                     //skrip untuk menghapus data foto lama yang di update
@@ -190,11 +190,14 @@ class WisatawanController extends Controller
     public function destroy($id)
     {
         $wisatawan = Wisatawan::find($id);
-        $user_id= $wisatawan->user_id;
-        $wisatawan->delete();
+        $user_id=$wisatawan->user_id;
         $user=User::find($user_id);
+            if(file_exists('fotowisatawan/'.$wisatawan->foto)){
+                //skrip untuk menghapus data foto lama yang di update
+            unlink('fotowisatawan/'.$wisatawan->foto);    
+            }
+        $wisatawan->delete(); 
         $user->delete();
         return redirect("/wisatawan");
-
     }
 }

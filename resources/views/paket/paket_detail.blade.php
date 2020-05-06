@@ -54,7 +54,7 @@
         <th>Gambar</th>
         <th>Opsi</th>
       </tr>
-      @foreach ($gambarmobil as $key=>$row)
+      @foreach ($paketdetail as $key=>$row)
       <tr>
           <td>{{$row->path}}</td>
           <td><img width="100" src="{{asset($row->path)}}"/></td> 

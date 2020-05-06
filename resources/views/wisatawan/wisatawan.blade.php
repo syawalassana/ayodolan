@@ -28,7 +28,7 @@
         <td>{{$row->user->name}}</td>
         <td>{{$row->tanggal_lahir}}</td>
         <td>{{$row->alamat}}</td>
-        <td><img width="100" src="/wisatawan/{{$row->foto }}"/></td>
+        <td><img width="100" src="/fotowisatawan/{{$row->foto }}"/></td>
         <td>{{$row->telpon}}</td>
         <td><a class="btn btn-warning" href="/wisatawan/{{$row->id}}/edit">Update</a></td>
         <td>

@@ -169,10 +169,23 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $event = Event::find($id);
+        $event = Event::find($id); //mencari data berdasarkan id pada model mobil
+        $event_detail=GambarEvent::where('event_id',$event->id)->get(); //mencari data relasi dari data mobil pada table gambar_mobil
+        foreach($event_detail as $ed){
+            if(file_exists($ed->path)){ //pengecekan apakah datanya ada berdasarkan lokasi filenya.
+                //skrip untuk menghapus data foto lama yang di update
+            unlink($ed->path);  //proses menghapus gambar berdasarkan lokasi file  
+            }
+            $ed->delete(); //menghapus data dari database pada table gambar mobil
+        }
+        if(file_exists('event/'.$event->gambar_event)){ //pengecekan data gambar pada table mobil
+            //skrip untuk menghapus data foto lama yang di update
+        unlink('event/'.$event->gambar_event);    //proses menhapus yang ada pada table mobil
+        }
         $event->delete();
         return redirect("/event");
     }
+
     public function tambah_gambar($id)
     {
         
