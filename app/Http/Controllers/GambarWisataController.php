@@ -109,7 +109,7 @@ class GambarWisataController extends Controller
             $gambarwisata = GambarWisata::find($id);
             $objwisata_id=$gambarwisata->objwisata_id;
             
-            if(file_exists($gambarwisata->path)){
+            if(file_exists(public_path().$gambarwisata->path)){
                 //lokasi public/event
                 //skrip untuk menghapus gambar ketika di update
             unlink($gambarwisata->path);

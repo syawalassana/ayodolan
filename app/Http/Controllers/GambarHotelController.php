@@ -109,7 +109,7 @@ class GambarHotelController extends Controller
         $gambarhotel = GambarHotel::find($id);
         $hotel_id=$gambarhotel->hotel_id;
         
-        if(file_exists($gambarhotel->path)){
+        if(file_exists(public_path().$gambarhotel->path)){
             //lokasi public/event
             //skrip untuk menghapus gambar ketika di update
         unlink($gambarhotel->path);

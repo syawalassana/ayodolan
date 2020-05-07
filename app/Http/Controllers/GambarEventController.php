@@ -111,7 +111,7 @@ class GambarEventController extends Controller
         $gambarevent = GambarEvent::find($id);
         $event_id=$gambarevent->event_id;
         
-        if(file_exists($gambarevent->path)){
+        if(file_exists(public_path().$gambarevent->path)){
             //lokasi public/event
             //skrip untuk menghapus gambar ketika di update
         unlink($gambarevent->path);

@@ -169,7 +169,7 @@ class HotelController extends Controller
             }
             $hd->delete(); //menghapus data dari database pada table gambar mobil
         }
-        if(file_exists('hotel/'.$hotel->foto_hotel)){ //pengecekan data gambar pada table mobil
+        if(file_exists(public_path().'hotel/'.$hotel->foto_hotel)){ //pengecekan data gambar pada table mobil
             //skrip untuk menghapus data foto lama yang di update
         unlink('hotel/'.$hotel->foto_hotel);    //proses menhapus yang ada pada table mobil
         }

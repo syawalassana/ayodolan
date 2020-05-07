@@ -110,7 +110,7 @@ class GambarMobilController extends Controller
             $gambarmobil = GambarMobil::find($id);
             $mobil_id=$gambarmobil->mobil_id;
             
-            if(file_exists($gambarmobil->path)){
+            if(file_exists(public_path().$gambarmobil->path)){
                 //lokasi public/event
                 //skrip untuk menghapus gambar ketika di update
             unlink($gambarmobil->path);

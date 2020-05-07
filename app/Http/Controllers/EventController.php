@@ -178,7 +178,7 @@ class EventController extends Controller
             }
             $ed->delete(); //menghapus data dari database pada table gambar mobil
         }
-        if(file_exists('event/'.$event->gambar_event)){ //pengecekan data gambar pada table mobil
+        if(file_exists(public_path().'event/'.$event->gambar_event)){ //pengecekan data gambar pada table mobil
             //skrip untuk menghapus data foto lama yang di update
         unlink('event/'.$event->gambar_event);    //proses menhapus yang ada pada table mobil
         }
