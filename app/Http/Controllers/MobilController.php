@@ -165,11 +165,7 @@ class MobilController extends Controller
             }
             $md->delete(); //menghapus data dari database pada table gambar mobil
         }
-<<<<<<< HEAD
-        if(file_exists(public_path().'mobil/'.$mobil->foto_mobil)){ //pengecekan data gambar pada table mobil
-=======
         if (file_exists(public_path() . 'mobil/' . $mobil->foto_mobil)) { //pengecekan data gambar pada table mobil
->>>>>>> 99e761246607efb1d08fcd9c1a8492754eb38a1d
             //skrip untuk menghapus data foto lama yang di update
             unlink('mobil/' . $mobil->foto_mobil);    //proses menhapus yang ada pada table mobil
         }
