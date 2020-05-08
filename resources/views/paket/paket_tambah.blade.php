@@ -20,14 +20,14 @@
     <div class="box-body">
       <div class="form-group">
         <label>Nama Paket </label>
-        <input type="text" name="nama_paket" value="{{old('nama_wisatawan')}}" class="form-control"  placeholder="Masukan Nama Wisatawan">
+        <input type="text" name="nama_paket" value="{{old('nama_paket')}}" class="form-control"  placeholder="Masukan Nama Wisatawan">
       </div>
       <div class="form-group">
         <label>Deskripsi</label>
         <input type="text" name="deskripsi" value="{{old('deskripsi')}}" class="form-control" name="lokasi" placeholder="Masukkan Deskripsi">
       </div>
       <div class="form-group">
-        <label>Harga</label>
+        <label>Harga Paket</label>
         <input type="text" name="harga" value="{{old('harga')}}" placeholder="Masukkan Harga Paket Wisata" class="form-control">
       </div>
       <div class="form-group">
@@ -35,8 +35,12 @@
         <input input type="file" name="gambar_paket">
       </div>
       <div class="form-group">
-        <label>Id Mobil</label>
-        <input type="text" name="id_mobil" value="{{old('id_mobil')}}" placeholder="Id Mobil" class="form-control">
+        <select name="paket" id="mobil_id" class="form-control">
+            <option value=""></option>
+            @foreach ($items as $mobil_id => $nama_mobil)
+                <option value="{{ $mobil_id }}">{{ $nama_mobil }}</option>
+            @endforeach
+        </select>
       </div>
       <div class="form-group">
         <label>Id Hotel</label>

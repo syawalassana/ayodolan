@@ -90,9 +90,8 @@ class PaketDetailController extends Controller
                     ->withInput();
         }
     $data_paketdetail = PaketDetail::find($id);
-    $data_paketdetail->id=$request->id;
-    $data_paketdetail->obj_wisata_id=$request->obj_wisata_id;
-    $data_paketdetail->lama_kunjungan = $request->lama_kunjungan;
+    $data_paketdetail->obj_wisata_id->nama_wisata=$request->nama_wisata;
+    $data_paketdetail->lama_kunjungan=$request->lama_kunjungan;
     }
 
     /**
