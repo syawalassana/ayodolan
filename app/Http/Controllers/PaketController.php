@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Paket;
 use App\PaketDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Mobil;
+use App\Hotel;
 
 class PaketController extends Controller
 {
@@ -28,7 +31,12 @@ class PaketController extends Controller
      */
     public function create()
     {
-        return view('paket.paket_tambah');
+        $data=[
+            'mobil'=>Mobil::all(),
+            'hotel'=>Hotel::all()
+        ];
+        
+        return view('paket.paket_tambah',$data);
     }
 
     /**
@@ -45,7 +53,6 @@ class PaketController extends Controller
 
         ];
         $validator = Validator::make($request->all(),[
-            'nama_wisata'=> 'required', //data tidak boleh kosong
             'deskripsi' => 'required',
             'harga' => 'numeric|required',
             'gambar_paket' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',

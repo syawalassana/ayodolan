@@ -10,7 +10,7 @@ class GambarMobil extends Model
 
     public function mobil(){
 
-         return $this->belongsTo('App/Mobil', 'mobil_id');
+         return $this->belongsTo('App\Mobil', 'mobil_id');
 
 }
 }

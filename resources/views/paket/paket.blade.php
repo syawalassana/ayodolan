@@ -26,7 +26,7 @@
       <td>{{$key+1}}</td>
         <td>{{$row->nama_paket}}</td>
         <td>{{$row->harga}}</td>
-        <td><img width="100" src="/paket/{{$row->gambar_paket }}"/></td>
+        <td><img width="100" src="/paket/{{$row->gambar_paket}}"/></td>
         <td>{{$row->lama_liburan}}</td>
         <td><a class="btn btn-warning" href="/paket/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/paket/{{$row->id}}">Lihat</a></td>

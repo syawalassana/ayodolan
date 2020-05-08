@@ -40,11 +40,6 @@
 <div class="box">
     <div class="box-header with-border">
       <h3 class="box-title">Gambar Mobil</h3>
-      <div class="box-tools">
-        <div class="form-group">
-          <a class="btn btn-success" href="/mobil-gambar/{{$data->id}}"> <i class="fa fa-plus"></i>Tambah Gambar</a>
-        </div>
-      </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -54,30 +49,23 @@
         <th>Gambar</th>
         <th>Opsi</th>
       </tr>
-      @foreach ($paketdetail as $key=>$row)
+     
+      @foreach ($data->mobil->mobildetail as $key=>$row)
       <tr>
           <td>{{$row->path}}</td>
           <td><img width="100" src="{{asset($row->path)}}"/></td> 
           <td>
             <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/mobil-gambar/{{$row->id}}" method="post">
               @csrf
-            <input name="_method" type="hidden" value="DELETE">
-              <button class="btn btn-danger" type="submit">Delete</button>
             </form>
           </td>
       </tr>
-      @endforeach
-     
+      @endforeach 
     </table>
     </div>
     <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Gambar Hotel</h3>
-          <div class="box-tools">
-            <div class="form-group">
-              <a class="btn btn-success" href="/hotel-gambar/{{$data->id}}"> <i class="fa fa-plus"></i>Tambah Gambar</a>
-            </div>
-          </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -87,15 +75,13 @@
             <th>Gambar</th>
             <th>Opsi</th>
           </tr>
-          @foreach ($gambarhotel as $key=>$row)
+          @foreach ($data->hotel->hoteldetail as $key=>$row)
           <tr>
               <td>{{$row->path}}</td>
               <td><img width="100" src="{{asset($row->path)}}"/></td> 
               <td>
                 <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/hotel-gambar/{{$row->id}}" method="post">
                   @csrf
-                <input name="_method" type="hidden" value="DELETE">
-                  <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
               </td>
           </tr>
@@ -120,7 +106,7 @@
                 <th>Gambar</th>
                 <th>Opsi</th>
               </tr>
-              @foreach ($gambarwisata as $key=>$row)
+           {{--    @foreach ($data->objekwisata->obj as $key=>$row)
               <tr>
                   <td>{{$row->path}}</td>
                   <td><img width="100" src="{{asset($row->path)}}"/></td> 
@@ -132,7 +118,7 @@
                     </form>
                   </td>
               </tr>
-              @endforeach
+              @endforeach --}}
              
             </table>
             </div>

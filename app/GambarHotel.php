@@ -10,6 +10,6 @@ class GambarHotel extends Model
 
     public function hotel(){
 
-         return $this->belongsTo('App/Hotel', 'hotel_id');
+         return $this->belongsTo('App\Hotel', 'hotel_id');
     }
 }

@@ -10,11 +10,11 @@ class Mobil extends Model
 
 public function paket(){
     
-    return $this->hasMany('App/Paket','paket_id');
+    return $this->hasMany('App\Paket','paket_id');
 }
 public function mobildetail(){
 
-    return $this->hasMany('App/GambarMobil','mobil_id');
+    return $this->hasMany('App\GambarMobil','mobil_id');
 }
 
 

@@ -19,7 +19,7 @@
   @csrf
     <div class="box-body">
       <div class="form-group">
-        <label>Nama Paket </label>
+        <label>Nama Paket</label>
         <input type="text" name="nama_paket" value="{{old('nama_paket')}}" class="form-control"  placeholder="Masukan Nama Wisatawan">
       </div>
       <div class="form-group">
@@ -35,16 +35,20 @@
         <input input type="file" name="gambar_paket">
       </div>
       <div class="form-group">
-        <select name="paket" id="mobil_id" class="form-control">
-            <option value=""></option>
-            @foreach ($items as $mobil_id => $nama_mobil)
-                <option value="{{ $mobil_id }}">{{ $nama_mobil }}</option>
+        <select name="mobil_id" id="mobil_id" class="form-control">
+            <option value="">Pilih Mobil</option>
+            @foreach ($mobil as $row)
+                <option value="{{ $row->id }}">{{ $row->nama_mobil}}</option>
             @endforeach
         </select>
       </div>
       <div class="form-group">
-        <label>Id Hotel</label>
-        <input type="text" name="id_hotel" value="{{old('id_hotel')}}" placeholder="Id Hotel" class="form-control">
+        <select name="hotel_id" id="hotel_id" class="form-control">
+            <option value="">Pilih Hotel</option>
+            @foreach ($hotel as $row)
+                <option value="{{ $row->id }}">{{ $row->nama_hotel}}</option>
+            @endforeach
+        </select>
       </div>
       <div class="form-group">
         <label>Lama Liburan</label>
@@ -56,7 +60,7 @@
       </div>
       <div class="form-group">
         <label>Harga Tour Guide</label>
-        <input type="text" name="id_mobil" value="{{old('harga_tour_guide')}}" placeholder="Masukkan Harga Tour Guide" class="form-control">
+        <input type="text" name="harga_tour_guide" value="{{old('harga_tour_guide')}}" placeholder="Masukkan Harga Tour Guide" class="form-control">
       </div>
     </div>
     <div class="box-footer">
