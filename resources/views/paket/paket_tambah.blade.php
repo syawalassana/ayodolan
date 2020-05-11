@@ -20,11 +20,11 @@
     <div class="box-body">
       <div class="form-group">
         <label>Nama Paket</label>
-        <input type="text" name="nama_paket" value="{{old('nama_paket')}}" class="form-control"  placeholder="Masukan Nama Wisatawan">
+        <input type="text" name="nama_paket" value="{{old('nama_paket')}}" class="form-control"  placeholder="Masukan Nama Paket">
       </div>
       <div class="form-group">
         <label>Deskripsi</label>
-        <input type="text" name="deskripsi" value="{{old('deskripsi')}}" class="form-control" name="lokasi" placeholder="Masukkan Deskripsi">
+        <textarea name="deskripsi" class="form-control" placeholder="Masukan Deskripsi Paket Wisata" >{{old('deskripsi')}}</textarea>
       </div>
       <div class="form-group">
         <label>Harga Paket</label>

@@ -44,6 +44,9 @@ Route::delete('objek_wisata-gambar/{id}','GambarWisataController@destroy');
 Route::get('/hotel-gambar/{id}','HotelController@tambah_gambar');
 Route::post('hotel-gambar','GambarHotelController@store');
 Route::delete('hotel-gambar/{id}','GambarHotelController@destroy');
+Route::get('/tambah-wisata/{id}','PaketDetailController@tambahWisata');
+Route::post('tambah-wisata','PaketDetailController@store');
+Route::delete('/hapus-wisata/{id}','PaketDetailController@hapusWisata');
 Route::get('/slider',function(){
     return Event::where('tgl_mulai','<=',date('Y-m-d'))->where('tgl_selesai','>=',date('Y-m-d'))->get();
 

@@ -43,7 +43,7 @@
         <h3 class="box-title">Objek Wisata</h3>
         <div class="box-tools">
             <div class="form-group">
-                <a class="btn btn-success" href="/obj_wisata-gambar/{{$data->id}}"> <i class="fa fa-plus"></i> Tambah Wisata</a>
+                <a class="btn btn-success" href="/tambah-wisata/{{$data->id}}"> <i class="fa fa-plus"></i> Tambah Wisata</a>
             </div>
         </div>
     </div>
@@ -54,15 +54,19 @@
                 <th>Wisata</th>
                 <th>Lokasi</th>
                 <th>Harga</th>
+                <th>Mulai</th>
+                <th>Selesai</th>
                 <th>Opsi</th>
             </tr>
                 @foreach ($data->paketDetail as $key=>$row)
                 <tr>
-                    <td>{{$row->ObjekWisata->nama_wisata}}</td>
-                    <td>{{$row->ObjekWisata->lokasi}}</td>
-                    <td>{{$row->ObjekWisata->harga}}</td>
+                    <td>{{$row->objekWisata->nama_wisata}}</td>
+                    <td>{{$row->objekWisata->lokasi}}</td>
+                    <td>{{$row->objekWisata->harga}}</td>
+                    <td>{{$row->start}}</td>
+                    <td>{{$row->end}}</td>
                     <td>
-                        <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/obj_wisata-gambar/{{$row->id}}" method="post">
+                        <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/hapus-wisata/{{$row->id}}" method="post">
                         @csrf
                         <input name="_method" type="hidden" value="DELETE">
                         <button class="btn btn-danger" type="submit">Delete</button>

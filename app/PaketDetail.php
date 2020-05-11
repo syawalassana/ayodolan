@@ -8,10 +8,10 @@ class PaketDetail extends Model
 {
     protected $table = 'paket_detail';
 
-    public function Paket(){
-        return $this->hasMany('App\Paket','paket_id');
+    public function paket(){
+        return $this->belongsTo('App\Paket','paket_id');
     }
-    public function ObjekWisata(){
-        return $this->hasMany('App\ObjekWisata','obj_wisata_id');
+    public function objekWisata(){
+        return $this->belongsTo('App\ObjekWisata','obj_wisata_id');
     }
 }

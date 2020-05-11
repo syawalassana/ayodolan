@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ObjekWisata;
 use App\PaketDetail;
 use Illuminate\Http\Request;
+use App\Paket;
+use Illuminate\Support\Facades\Validator;
+use App\GambarWisata;
 
 class PaketDetailController extends Controller
 {
@@ -27,7 +31,7 @@ class PaketDetailController extends Controller
      */
     public function create()
     {
-        return view ('paket.paket_detail');
+       
     }
 
     /**
@@ -36,8 +40,33 @@ class PaketDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {   
+        $messages = [
+            'required' => ':attribute Tidak Boleh Kosong',
+
+        ];
+        $validator = Validator::make($request->all(),[
+            'obj_wisata_id' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+        ],$messages
+    );
+        if ($validator->fails()){
+            
+            return redirect('/tambah-wisata/'.$request->paket_id)
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+    $data_paketdetail = new PaketDetail;
+    $data_paketdetail->obj_wisata_id=$request->obj_wisata_id;
+    $data_paketdetail->paket_id=$request->paket_id;
+    $data_paketdetail->start=$request->start;
+    $data_paketdetail->end=$request->end;
+    $data_paketdetail->save();
+    if($data_paketdetail){
+        return redirect('/paket/'.$data_paketdetail->paket_id);
+    }
     }
 
     /**
@@ -48,7 +77,7 @@ class PaketDetailController extends Controller
      */
     public function show(PaketDetail $paketDetail)
     {
-        
+
     }
 
     /**
@@ -71,27 +100,6 @@ class PaketDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages = [
-            'required' => ':attribute Tidak Boleh Kosong',
-            'numeric' => ':attribute harus angka',
-
-        ];
-        $validator = Validator::make($request->all(),[
-            'nama_wisata'=> 'required', //data tidak boleh kosong
-            'obj_wisata_id' => 'required',
-            'harga' => 'numeric|required',
-            'gambar_paket' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-            'lama_kunjungan' => 'required',
-        ],$messages
-    );
-        if ($validator->fails()){
-          return redirect('/paket/create')
-                    ->withErrors($validator)
-                    ->withInput();
-        }
-    $data_paketdetail = PaketDetail::find($id);
-    $data_paketdetail->obj_wisata_id->nama_wisata=$request->nama_wisata;
-    $data_paketdetail->lama_kunjungan=$request->lama_kunjungan;
     }
 
     /**
@@ -100,8 +108,19 @@ class PaketDetailController extends Controller
      * @param  \App\PaketDetail  $paketDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PaketDetail $paketDetail)
+    public function destroy(PaketDetail $id)
     {
-        //
+    }
+    function tambahWisata($id){
+        $data=[
+            'objekWisata'=>ObjekWisata::all(),
+            'data'=>Paket::find($id),
+        ];
+       return view ('paket.tambah_objek_wisata', $data);
+    }
+    function hapusWisata($id){
+        $paketdetail = PaketDetail::find($id);
+        $paketdetail->delete();
+        return redirect("/paket/".$id);
     }
 }

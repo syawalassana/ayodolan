@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Mobil;
 use App\Hotel;
+use App\ObjekWisata;
 
 class PaketController extends Controller
 {
@@ -100,7 +101,7 @@ class PaketController extends Controller
     {
         $items=[
             'data'=>Paket::find($id),
-            'paketdetail'=>PaketDetail::where('paket_id', $id)->get()
+            'paketdetail'=>PaketDetail::with('objekWisata')->where('paket_id', $id)->get()
         ];
         return view('paket.paket_detail',$items);
     }
@@ -194,10 +195,17 @@ class PaketController extends Controller
      * @param  \App\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paket $id)
+    public function destroy($id)
     {
-        $paket = Paket::find($id);
+        $paket=Paket::find($id);
         $paket->delete();
+        $paket->paketDetail()->delete();
         return redirect("/paket");
+    }
+    public function tambahwisata($id){
+        $items=[
+            'data'=>ObjekWisata::find($id)
+        ];
+        return view ('paket.tambah_objek_wisata', $items);
     }
 }

@@ -47,7 +47,7 @@ class GambarEventController extends Controller
         ],$messages
     );
         if ($validator->fails()){
-            return redirect('event-gambar/'.$request->mobil_id)
+            return redirect('event-gambar/'.$request->event_id)
                     ->withErrors($validator)
                     ->withInput();
     }
