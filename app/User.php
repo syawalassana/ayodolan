@@ -40,4 +40,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Wistawan','user_id');
     }
+    public function transaksi(){
+        return $this->hasMany('App\Transaksi','user_id');
+    }
+    
 }

@@ -86,7 +86,6 @@ class WisatawanController extends Controller
     if($data_wisatawan){
         return redirect('/wisatawan');
     }
-    $data_wisatawan->telpon=$request->telpon;
     }
 
     /**
@@ -165,20 +164,16 @@ class WisatawanController extends Controller
                     //skrip untuk menghapus data foto lama yang di update
                 unlink('wisatawan/'.$data_wisatawan->foto);    
                 }
-                $data_wisatawan->foto=$nama_foto;                
-            $data_wisatawan->deskripsi = $request->deskripsi;
-            $data_wisatawan->save();   
-
-
-            
+                $data_wisatawan->foto=$nama_foto;
+                $data_wisatawan->telpon=$request->telpon;                
+                $data_wisatawan->save(); 
+                if($data_wisatawan){
+                    return redirect('/wisatawan');
             }
+        
         }
-        //^masuk table users
-        if($data_wisatawan){
-            return redirect('/wisatwan');
-        }
-        $data_wisatawan->telpon=$request->telpon;
-        }
+    }
+}
     }
 
     /**

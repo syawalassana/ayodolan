@@ -39,6 +39,8 @@
                 <li><a href="/hotel"><i class="fa fa-circle-o"></i>Data Hotel</a></li>
                 <li><a href="/mobil"><i class="fa fa-circle-o"></i>Data Mobil</a></li>
                 <li><a href="/paket"><i class="fa fa-circle-o"></i>Data Paket Wisata</a></li>
+                <li><a href="/transaksi"><i class="fa fa-circle-o"></i>Data Transaksi</a></li>
+                
                     
                 </ul>
             </li>

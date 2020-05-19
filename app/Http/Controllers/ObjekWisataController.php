@@ -51,7 +51,7 @@ class ObjekWisataController extends Controller
             'nama_wisata'=> 'required', //data tidak boleh kosong
             'lokasi' => 'required',
             'harga' => 'required | numeric',
-            'gambar' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'nullable|file|image|mimes:jpeg,png,jpg|max:4048',
             'tipe_wisata' => 'required',
             'ciri_khas' => 'required',
             'deskripsi' => 'required',

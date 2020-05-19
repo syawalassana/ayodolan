@@ -32,6 +32,7 @@ Route::resource('/event', 'EventController');
 Route::resource('/hotel', 'HotelController');
 Route::resource('/mobil', 'MobilController');
 Route::resource('/paket', 'PaketController');
+Route::resource('/transaksi', 'TransaksiController');
 Route::get('/mobil-gambar/{id}','MobilController@tambah_gambar');
 Route::post('mobil-gambar','GambarMobilController@store');
 Route::delete('mobil-gambar/{id}','GambarMobilController@destroy');
@@ -47,6 +48,9 @@ Route::delete('hotel-gambar/{id}','GambarHotelController@destroy');
 Route::get('/tambah-wisata/{id}','PaketDetailController@tambahWisata');
 Route::post('tambah-wisata','PaketDetailController@store');
 Route::delete('/hapus-wisata/{id}','PaketDetailController@hapusWisata');
+Route::get('/tambah-detail-wisatawan/{id}','TransaksiController@tambah_data');
+Route::post('tambah-detail-wisatawan','TransaksiPesertaController@store');
+
 Route::get('/slider',function(){
     return Event::where('tgl_mulai','<=',date('Y-m-d'))->where('tgl_selesai','>=',date('Y-m-d'))->get();
 

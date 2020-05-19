@@ -40,6 +40,7 @@
                 <option value="Pantai"{{old('tipe_wisata')=='Pantai'?'selected':''}}>Pantai</option>
                 <option value="Gunung"{{old('tipe_wisata')=='Gunung'?'selected':''}}>Gunung</option>
                 <option value="Goa"{{old('tipe_wisata')=='Goa'?'selected':''}}>Goa</option>
+                <option value="Goa"{{old('tipe_wisata')=='Sungai'?'selected':''}}>Goa</option>
              </select>
      </div>
      <div class="form-group">

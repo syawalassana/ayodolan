@@ -10,6 +10,10 @@
         </div>
       </div>
     </div>
+    <form class="form-inline my-2 my-lg-0" method="get" action="{{url('search')}}">
+        <input class="form-control mr-sm-2" type="text" name="q" placeholder="Kata Kunci" aria-label="Search">
+         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Cari</button>
+     </form>
     <!-- /.box-header -->
     <div class="box-body">
         <div class="table-responsive">

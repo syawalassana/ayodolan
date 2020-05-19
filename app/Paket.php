@@ -19,4 +19,7 @@ class Paket extends Model
     {
         return $this->hasMany('App\PaketDetail', 'paket_id');
     }
+    public function transaksi(){
+        return $this->hasMany('App\Transaksi','paket_id');
+    }
 }
