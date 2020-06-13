@@ -53,7 +53,7 @@ class EventController extends Controller
         ],$messages
     );
         if ($validator->fails()){
-            return redirect('event/'.$id.'/edit')
+            return redirect('/event/create')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -125,7 +125,7 @@ class EventController extends Controller
             $validator = Validator::make($request->all(),[
                 'nama_event'=> 'required', //data tidak boleh kosong
                 'lokasi' => 'required',
-                'gambar_event' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
+                'gambar_event' => 'nullable|file|image|mimes:jpeg,png,jpg|max:4048',
                 'deskripsi_event' => 'required',
             ],$messages
         );

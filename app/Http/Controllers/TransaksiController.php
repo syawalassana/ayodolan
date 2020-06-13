@@ -58,7 +58,7 @@ class TransaksiController extends Controller
         $data_transaksi->harga_supir=$paket->harga_supir;
         $data_transaksi->harga_tour_guide=$paket->harga_tour_guide;
         $data_transaksi->harga=$paket->harga;
-        $data_transaksi->total_transaksi=$paket->harga_supir+$paket->harga_tour_guide+$paket->harga;
+        $data_transaksi->total_transaksi=(($paket->harga_supir+$paket->harga_tour_guide+$paket->harga)*$data_transaksi->jumlah_peserta*1.2);
         $data_transaksi->save();
         if ($data_transaksi) {
             return redirect('/transaksi');

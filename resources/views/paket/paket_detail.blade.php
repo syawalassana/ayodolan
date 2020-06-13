@@ -3,7 +3,7 @@
 
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Detail Paket</h3>
+      <h3 class="box-title">Detail Paket Wisata</h3>
       <div class="box-tools">
         <div class="form-group">
           <a class="btn btn-warning" href="/paket"> <i class="fa fa-arrow-left"></i> Kembali </a>
