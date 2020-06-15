@@ -24,3 +24,4 @@ Route::get('data_hotel','Api\HotelController@index');
 Route::get('data_event','Api\EventController@index');
 Route::get('data_mobil','Api\MobilController@index');
 Route::get('data_paket','Api\PaketController@index');
+Route::get('data_wisatawan','Api\WisatawanController@index');
