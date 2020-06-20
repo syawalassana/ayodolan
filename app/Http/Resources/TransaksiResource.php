@@ -18,8 +18,7 @@ class TransaksiResource extends JsonResource
      */
     public function toArray($request)
     {
-        $transaksidetail= TransaksiPesertaResource::collection(TransaksiPeserta::all());
-        
+        $transaksidetail= TransaksiPesertaResource::collection(TransaksiPeserta::all()); 
         return[
        'id'=> $this->id,
        'Nomor Invoice'=> $this->nomor_invoice,

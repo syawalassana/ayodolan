@@ -1,7 +1,5 @@
 <?php
 use Illuminate\Http\Request;
-use Symfony\Component\Routing\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +13,9 @@ use Symfony\Component\Routing\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('user/register', 'Api\UserController@register');
+Route::post('user/login', 'Api\UserController@login');
 
 Route::get('user', 'Api\HomeController@index');
 Route::get('user-res', 'Api\HomeController@getUserResource');

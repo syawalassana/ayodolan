@@ -1,61 +1,88 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Wisatawan;
 use Auth;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Mail;
 use App\Mail\PasswordReset;
+use Exception;
+use DB;
+use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class UserController
 {
     public function register(Request $request){
-        {
-        
-        $users=new User();
-        $users->name=$request->nama_wisatawan;
-        $users->email=$request->email;
-        $users->password=bcrypt('ayodolan');
-        $users->role_id=2;
-        $users->save();
-        if($users){
-        //masuk table wisatawan
-            $data_wisatawan = new Wisatawan;
-            $data_wisatawan->user_id=$users->id;
-            $data_wisatawan->tanggal_lahir=$request->tanggal_lahir;
-            $data_wisatawan->alamat=$request->alamat;
-            $data_wisatawan->telpon =$request->telpon;
-            $data_wisatawan->save();   
+        try{
+            DB::beginTransaction();
+            $users=new User;
+            $users->name=$request->input('nama');
+            $users->email=$request->input('email');
+            $users->password=Hash::make($request->input('password'));
+            $users->role_id=2;
+            $users->save();
+
+            if($users){
+                //masuk table wisatawan
+                $data_wisatawan = new Wisatawan;
+                $data_wisatawan->user_id=$users->id;
+                $data_wisatawan->tanggal_lahir=$request->input('tgl_lahir');
+                $data_wisatawan->alamat=$request->input('alamat');
+                $data_wisatawan->telpon=$request->input('no_telp');
+                $data_wisatawan->save();  
+                
+                DB::commit();
+                return response()->json(array(
+                    "success" => true
+                ));
+            } 
+            else{
+                DB::rollback();
+                return response()->json(array(
+                    "success" => false
+                ));
+            }
         }
-        //^masuk table users
-        if($data_wisatawan){
-            return $this->login($request);
+        catch(Exception $e){
+            DB::rollback();
+            return response()->json(array(
+                "success" => false,
+                "reason" => $e->getMessage()
+            ));
         }
-        }
-        
     }
     public function login(Request $request)
     {
-        
-        $input = $request->only('email', 'password');
-        $jwt_token = null;
-        if (!$jwt_token = JWTAuth::attempt($input)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], 401);
+        try{
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $token = Hash::make(uniqid(null, true));
+    
+            $data = User::where('email', '=', $email)
+                ->first();
+            if(Hash::check($password, $data->password)){
+                return response()->json([
+                    'success' => true,
+                    'token' => $token
+                ]);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'reason' => 'username atau password salah'
+                ]);
+            }
         }
-        // get the user 
-        $user = Auth::user();
-       
-        return response()->json([
-            'success' => true,
-            'token' => $jwt_token,
-            'user' => $user
-        ]);
+        catch(Exception $e){
+            return response()->json(array(
+                "success" => false,
+                "reason" => $e->getMessage()
+            ));
+        }
     }
     public function logout(Request $request)
     {
