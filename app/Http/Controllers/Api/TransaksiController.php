@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\TransaksiResource;
 use App\Transaksi;
+use App\TransaksiPeserta;
+use App\User;
+use App\Paket;
+use Illuminate\Support\Facades\DB;
 
-class TransaksiController extends Controller
+class TransaksiController
 {
     public function index(){
         $data_transaksi= TransaksiResource::collection(Transaksi::all());
@@ -17,5 +20,59 @@ class TransaksiController extends Controller
             'data' => $data_transaksi   ,
             'massage' => 'Data Transaksi',
         ]);
+    }
+    public function buat_transaksi(Request $request){
+        try{
+            DB::beginTransaction();
+
+            $paket=Paket::find($request->input('paket_id'));
+            $user=User::find($request->input('user_id'));
+
+            $nomor_invoice = uniqid();
+            $total_transaksi = (($paket->harga_supir+$paket->harga_tour_guide+$paket->harga)*
+                $request->input('jumlah_peserta')*1.2);
+
+            $data_transaksi = new Transaksi;
+            $data_transaksi->nomor_invoice = $nomor_invoice;
+            $data_transaksi->user_id = $user->id;
+            $data_transaksi->paket_id = $paket->id;
+            $data_transaksi->jumlah_peserta = $request->input('jumlah_peserta');
+            $data_transaksi->tanggal_liburan = $request->input('tanggal_liburan');
+            $data_transaksi->total_transaksi = $total_transaksi;
+            $data_transaksi->harga_supir = $paket->harga_supir;
+            $data_transaksi->harga_tour_guide = $paket->harga_tour_guide;
+            $data_transaksi->harga = $paket->harga;
+            $data_transaksi->save();
+
+            if($data_transaksi){
+                for($i = 1; $i <= $request->input('jumlah_peserta'); $i++){
+                    $transaksi_peserta = new TransaksiPeserta;
+                    $transaksi_peserta->transaksi_id = $data_transaksi->id;
+                    $transaksi_peserta->nama = $request->input($i .'_nama');
+                    $transaksi_peserta->gender = $request->input($i .'_gender');
+                    $transaksi_peserta->no_telepon = $request->input($i .'_no_telepon');
+                    $transaksi_peserta->save();                  
+                }
+                DB::commit();
+                return response()->json(array(
+                    "success" => true,
+                    "nama_pemesan" => $user->name,
+                    "total_transaksi" => $total_transaksi
+                ));
+            }
+            else{
+                return response()->json(array(
+                    "success" =>false
+                ));
+            }
+
+        }
+        catch(Exception $e){
+            DB::rollback();
+            return response()->json(array(
+                "success" => false,
+                "reason" => $e->getMessage()
+            ));
+        }
     }
 }

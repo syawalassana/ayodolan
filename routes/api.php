@@ -16,6 +16,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('user/register', 'Api\UserController@register');
 Route::post('user/login', 'Api\UserController@login');
+Route::post('transaksi/buat_transaksi', 'Api\TransaksiController@buat_transaksi');
 
 Route::get('user', 'Api\HomeController@index');
 Route::get('user-res', 'Api\HomeController@getUserResource');
