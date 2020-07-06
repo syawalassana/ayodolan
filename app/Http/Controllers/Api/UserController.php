@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController
 {
     public function register(Request $request){
+
         try{
             DB::beginTransaction();
             $users=new User;
@@ -37,13 +38,15 @@ class UserController
                 
                 DB::commit();
                 return response()->json(array(
-                    "success" => true
+                    "success" => true 
+
                 ));
             } 
             else{
                 DB::rollback();
                 return response()->json(array(
-                    "success" => false
+                    "success" => false,
+                    "reason" => "kesalahan sistem"
                 ));
             }
         }
@@ -51,7 +54,7 @@ class UserController
             DB::rollback();
             return response()->json(array(
                 "success" => false,
-                "reason" => $e->getMessage()
+                "reason" => "kesalahan sistem"
             ));
         }
     }
@@ -67,20 +70,21 @@ class UserController
             if(Hash::check($password, $data->password)){
                 return response()->json([
                     'success' => true,
+                    'id' => $data->id,
                     'token' => $token
                 ]);
             }
             else{
                 return response()->json([
                     'success' => false,
-                    'reason' => 'username atau password salah'
+                    'reason' => 'email atau password salah'
                 ]);
             }
         }
         catch(Exception $e){
             return response()->json(array(
                 "success" => false,
-                "reason" => $e->getMessage()
+                "reason" => 'email atau password salah'
             ));
         }
     }
@@ -128,27 +132,92 @@ class UserController
 
    
 public function update(Request $request){
-    $user=$this->getCurrentUser($request);
-    if(!$user){
+    // nama:
+    // email:
+    // password:
+    // tgl_lahir:
+    // alamat:
+    // foto:
+
+    try{
+        DB::beginTransaction();
+        if(!$request->filled('id')){
+            return response()->json([
+                'success' => false,
+                'message' => 'Id harus diisi'
+            ]);
+        }
+    
+        $users = User::find($request->id);
+        if(!$users){
+            return response()->json([
+                'success' => false,
+                'message' => 'User tidak ditemukan'
+            ]);
+        }
+
+        if($request->filled('nama')){
+            $users->name = $request->nama;
+        }
+        if($request->filled('email')){
+            $users->email = $request->email;
+        }
+        if($request->filled('password')){
+            $users->password = Hash::make($request->password);
+        }
+        $users->save();
+
+        if(!$users){
+            return response()->json([
+                'success' => false,
+                'message' => 'User tidak ditemukan'
+            ]);
+        }
+
+        $data_wisatawan = Wisatawan::where('user_id', '=', $users->id)->first();
+        //masuk table wisatawan
+ 
+        if($request->filled('tanggal_lahir')){
+            $data_wisatawan->tanggal_lahir=$request->tanggal_lahir;
+        }
+        if($request->filled('password')){
+            $data_wisatawan->alamat=$request->alamat;
+        }
+
+        if($request->has('foto')){
+            $foto = $request->file('foto');
+            $nama_foto = time()."_".$foto->getClientOriginalName();
+                // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'fotowisatawan';
+            $foto->move($tujuan_upload,$nama_foto);
+            if(file_exists('wisatawan/'.$data_wisatawan->foto)){
+                //skrip untuk menghapus data foto lama yang di update
+                unlink('wisatawan/'.$data_wisatawan->foto);    
+            }
+            $data_wisatawan->foto=$nama_foto;
+        }
+
+        if($request->filled('telpon')){
+            $data_wisatawan->telpon=$request->telpon;                
+        }
+        $data_wisatawan->save(); 
+
+        DB::commit();
+        return response()->json([
+            'success' => true,
+            'message' => 'Sukses update data'
+        ]);
+
+    }
+    catch(Exception $e){
+        DB::rollback();
         return response()->json([
             'success' => false,
-            'message' => 'User is not found'
+            'message' => $e->getMessage()
         ]);
     }
-   
-    unset($data['token']);
 
-    $updatedUser = User::where('id', $user->id)->update($data);
-    $user =  User::find($user->id);
-
-    return response()->json([
-        'success' => true, 
-        'message' => 'Information has been updated successfully!',
-        'user' =>$user
-    ]);
 }
-
-
 
 }
 
