@@ -30,10 +30,9 @@
       <td>{{$key+1}}</td>
         <td>{{$row -> nama_wisata}}</td>
         <td>{{$row -> lokasi}}</td>
-        <td><img width="100" src="/objekwisata/{{$row->gambar}}"/></td>
+        <td><img width="100" src="{{$row->url_image}}"/></td>
         <td><a class="btn btn-warning" href="/objek-wisata/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/objek-wisata/{{$row->id}}">Detail</a></td>
-        
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/objek-wisata/{{$row->id}}" method="post">
             @csrf

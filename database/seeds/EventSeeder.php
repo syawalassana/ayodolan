@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MobilSeeder extends Seeder
+class EventSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class MobilSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Mobil', 50)->create();
+        factory('App\Event',50)->create();
     }
 }

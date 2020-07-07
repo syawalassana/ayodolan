@@ -16,11 +16,11 @@ class CreateWisatawansTable extends Migration
         Schema::create('wisatawan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->date('tanggal_lahir');
-            $table->string('alamat');
-            $table->string('foto');
-            $table->string('telpon');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('telpon')->nullable();
             $table->timestamps();
         });
     }

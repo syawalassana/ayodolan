@@ -21,7 +21,7 @@ class CreateEventTable extends Migration
             $table->date('tgl_selesai');
             $table->string('lokasi');
             $table->string('gambar_event');
-            $table->string('deskripsi_event');
+            $table->text('deskripsi_event');
             $table->timestamps();
         });
     }

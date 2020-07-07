@@ -25,9 +25,9 @@
       <tr>
       <td>{{$key+1}}</td>
         <td>{{$row->nama_mobil}}</td>
-        <td>{{$row->harga_sewa}}</td>
+        <td>{{$row->harga_sewa_tx}}</td>
         <td>{{$row->kapasitas}}</td>
-        <td><img width="100" src="/mobil/{{$row->foto_mobil}}"/></td>
+        <td><img width="100" src="{{$row->url_image}}"/></td>
         <td><a class="btn btn-warning" href="/mobil/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/mobil/{{$row->id}}">Detail</a></td>
         <td>
@@ -51,6 +51,6 @@
 
 
     <table border="1">
-     
+
     </table>
 @endsection

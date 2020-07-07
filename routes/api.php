@@ -14,8 +14,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('user/register', 'Api\UserController@register');
-Route::post('user/login', 'Api\UserController@login');
+Route::namespace('Api')->group(function () {
+    Route::post('register', 'UserController@register');
+    Route::post('login', 'UserController@login');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::post('logout', 'UserController@logout');
+    });
+});
+
 Route::post('transaksi/buat_transaksi', 'Api\TransaksiController@buat_transaksi');
 
 Route::get('user', 'Api\HomeController@index');
