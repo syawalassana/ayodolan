@@ -34,8 +34,8 @@ class TransaksiController
 
             $data_transaksi = new Transaksi;
             $data_transaksi->nomor_invoice = $nomor_invoice;
-            $data_transaksi->user_id = $user->id;
-            $data_transaksi->paket_id = $paket->id;
+            $data_transaksi->user_id = $user->name;
+            $data_transaksi->paket_id = $paket->nama_paket;
             $data_transaksi->jumlah_peserta = $request->input('jumlah_peserta');
             $data_transaksi->tanggal_liburan = $request->input('tanggal_liburan');
             $data_transaksi->total_transaksi = $total_transaksi;
