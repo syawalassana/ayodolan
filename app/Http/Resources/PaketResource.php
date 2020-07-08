@@ -21,13 +21,22 @@ class PaketResource extends JsonResource
         'id' => $this->id,
         'nama_paket' => $this->nama_paket,
         'deskripsi_paket' => $this->deskripsi,
+        'lama_liburan' => $this->lama_liburan,
         'harga_paket' => $this->harga_tx,
         'gambar_paket' => $this->url_image,
-        'nama_mobil' => $this->mobil->nama_mobil,
-        'hotel' => $this->hotel->nama_hotel,
+        'mobil' => [
+            'nama' => $this->mobil->nama_mobil,
+            'kapasitas' => $this->mobil->kapasitas,
+        ],
+        'hotel' => [
+            'nama' => $this->hotel->nama_hotel,
+            'alamat' => $this->hotel->alamat,
+        ],
         'harga_supir' => $this->harga_supir_tx,
         'harga_tour_guide' => $this->harga_tour_guide_tx,
         'detail_paket_wisata' => $paketdetail,
+        'harga_final' => $this->harga_final_tx,
+        'harga_final_r' => $this->harga_final,
        ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTanggalLiburanDiTransaksiTabel extends Migration
+class AddStatusTranskasiOnTransaksiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddTanggalLiburanDiTransaksiTabel extends Migration
     public function up()
     {
         Schema::table('transaksi', function (Blueprint $table) {
-            $table->date('tanggal_liburan');
+            $table->enum('status', ['menunggu','lunas','batal'])->default('menunggu');
         });
     }
 
@@ -26,7 +26,7 @@ class AddTanggalLiburanDiTransaksiTabel extends Migration
     public function down()
     {
         Schema::table('transaksi', function (Blueprint $table) {
-            $table->dropColumn('tanggal_liburan');
+            $table->dropColumn('status');
         });
     }
 }

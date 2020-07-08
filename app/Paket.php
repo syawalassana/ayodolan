@@ -9,21 +9,35 @@ class Paket extends Model
 {
     protected $table = 'paket';
 
-    protected $appends = ['harga_tx','harga_supir_tx','harga_tour_guide_tx','url_image'];
+    protected $appends = ['harga_tx','harga_supir_tx','harga_tour_guide_tx','url_image','harga_final','harga_final_tx'];
+
+    public function getHargaFinalAttribute()
+    {
+        return $this->harga + $this->harga_supir + $this->harga_tour_guide;
+    }
+
+    public function getHargaFinalTxAttribute()
+    {
+        $h = $this->harga + $this->harga_supir + $this->harga_tour_guide;
+
+        return Ayo::rupiah($h);
+    }
 
     public function getHargaTxAttribute()
     {
-        if($this->harga){
+        if ($this->harga) {
             return Ayo::rupiah($this->harga);
         }
+
         return 'Rp. 0';
     }
 
     public function getUrlImageAttribute()
     {
-        if($this->gambar_paket){
-            return asset('paket/'.$this->gambar_paket);
+        if ($this->gambar_paket) {
+            return asset('paket/' . $this->gambar_paket);
         }
+
         return asset(DEFAULT_IMAGE);
     }
 
