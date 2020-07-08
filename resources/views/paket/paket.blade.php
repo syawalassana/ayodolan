@@ -17,7 +17,7 @@
         <th>No</th>
         <th>Nama Paket Wisata</th>
         <th>Harga Paket Wisata</th>
-      <!--  <th>Gambar</th> -->
+        <th>Gambar</th>
         <th>Lama Liburan Per/hari</th>
         <th class="text-center" colspan="3">OPSI</th>
       </tr>
