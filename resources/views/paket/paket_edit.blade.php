@@ -11,7 +11,7 @@
 @endif
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Form Edit Wisatawan</h3>
+    <h3 class="box-title">Form Edit Paket</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
@@ -31,29 +31,44 @@
   <div class="box-body">
     <div class="form-group">
             <label>Nama Paket </label>
-            <input type="text" name="nama_paket" value="{{old('nama_wisatawan')}}" class="form-control"  placeholder="Masukan Nama Wisatawan">
+            <input type="text" name="nama_paket" value="{{old('nama_paket')}}" class="form-control"  placeholder="Masukan Nama Wisatawan">
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" value="{{old('email')}}" class="form-control" name="lokasi" placeholder="Masukkan Email">
+            <label>Deskripsi</label>
+            <input type="text" name="deskripsi" value="{{old('deskripsi')}}" class="form-control" name="lokasi" placeholder="Masukkan Email">
           </div>
           <div class="form-group">
-            <label>Tanggal Lahir</label>
-            <input type="date" name="tanggal_lahir" value="{{old('tanggal_lahir')}}" placeholder="Masukkan Tanggal Lahir" class="form-control">
+            <label>harga</label>
+            <input type="text" name="harga" value="{{old('harga')}}" placeholder="Masukkan Harga" class="form-control">
           </div>
           <div class="form-group">
-            <label>Alamat</label>
-            <textarea name="alamat" class="form-control" placeholder="Masukan Alamat Anda" >{{old('alamat')}}</textarea>
+            <label>Gambar Paket</label>
+            <input input type="file" name="gambar_paket">
           </div>
           <div class="form-group">
-            <label>No Telepon</label>
-            <textarea name="telpon" class="form-control" placeholder="Masukan No HP Anda" >{{old('telpon')}}</textarea>
+            <select name="mobil_id" id="mobil_id" class="form-control">
+                <option value="">Pilih Mobil</option>
+                @foreach ($mobil as $row)
+                    <option value="{{ $row->id }}">{{ $row->nama_mobil}}</option>
+                @endforeach
+            </select>
           </div>
-          
           <div class="form-group">
-            <label>Foto</label>
-            <input input type="file" name="foto">
-          </div>
+            <select name="hotel_id" id="hotel_id" class="form-control">
+                <option value="">Pilih Hotel</option>
+                @foreach ($hotel as $row)
+                    <option value="{{ $row->id }}">{{ $row->nama_hotel}}</option>
+                @endforeach
+            </select>
+            <div class="form-group">
+                <label>Biaya Tour Guide</label>
+                <input type="text" name="harga_tour_guide" value="{{old('harga_tour_guide')}}" class="form-control" placeholder="Harga Tour Guide">
+              </div>
+              <div class="form-group">
+                <label>Deskripsi</label>
+                <input type="text" name="harga_supir" value="{{old('harga_supir')}}" class="form-control" name="harga_supir" placeholder="Harga Supir">
+              </div>
+         
     
   </div>
     <div class="box-footer">
