@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\User;
 use App\Wisatawan;
-use JWTAuth;
 use Exception;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,7 @@ class UserController
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
         ];
 
         $messages = [
@@ -28,12 +27,12 @@ class UserController
             'email.email' => 'Format alamat email salah!',
             'email.unique' => 'Alamat email sudah digunakan!',
             'password.required' => 'Password tidak boleh kosong!',
-            'password.min' => 'Password minimal 6 karakter'
+            'password.min' => 'Password minimal 6 karakter',
         ];
 
-        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'status' => false,
                 'data' => '',
@@ -46,9 +45,9 @@ class UserController
             $users = new User;
             $users->name = $request->name;
             $users->email = $request->email;
-            $users->password = Hash::make($request->input('password'));
+            $users->password = Hash::make($request->password);
             $users->role_id = 2;
-            $users->api_token = Hash::make(uniqid(null, true));
+            $users->api_token = str_random(60);
             $users->save();
 
             if ($users) {
@@ -62,7 +61,7 @@ class UserController
                 return response()->json([
                     'status' => true,
                     'data' => $users,
-                    'message' => 'Registrasi berhasil!'
+                    'message' => 'Registrasi berhasil!',
                 ]);
             }
 
@@ -71,7 +70,7 @@ class UserController
             return response()->json([
                 'status' => false,
                 'data' => '',
-                'message' => 'Registrasi gagal!'
+                'message' => 'Registrasi gagal!',
             ]);
         } catch (Exception $e) {
             DB::rollback();
@@ -88,15 +87,15 @@ class UserController
         try {
             $email = $request->email;
             $password = $request->password;
-            if(Auth::attempt(['email' => $email, 'password' => $password])){
+            if (Auth::attempt(['email' => $email, 'password' => $password])) {
                 $user = Auth::user();
                 $user->api_token = Hash::make(uniqid(null, true));
                 $user->save();
-                if($user){
+                if ($user) {
                     return response()->json([
                         'status' => true,
                         'data' => $user,
-                        'message' => 'Berhasil masuk!'
+                        'message' => 'Berhasil masuk!',
                     ]);
                 }
             }
@@ -104,9 +103,8 @@ class UserController
             return response()->json([
                 'status' => false,
                 'data' => '',
-                'message' => 'Gagal masuk!'
+                'message' => 'Gagal masuk!',
             ]);
-
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
@@ -120,16 +118,18 @@ class UserController
         $u = Auth::guard('api')->user();
         $u->api_token = '';
         $u->save();
+
         return response()->json([
             'status' => true,
             'data' => '',
-            'message' => 'Berhasil keluar!'
+            'message' => 'Berhasil keluar!',
         ]);
     }
 
     public function getCurrentUser()
     {
         $u = Auth::guard('api')->user();
+
         return $u;
     }
 }

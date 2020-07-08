@@ -15,18 +15,19 @@ class PaketResource extends JsonResource
      */
     public function toArray($request)
     {
-       $paketdetail = PaketDetailResource::collection(PaketDetail::all());
-       return[
-        'id'=> $this->id,
-        'nama paket'=> $this->nama_paket,
-        'deskripsi paket'=> $this->deskripsi,
-        'harga paket'=> $this->harga,
-        'gambar paket'=> $this->gambar_paket,
-        'Nama Mobil'=> $this->mobil->nama_mobil,
-        'hotel'=> $this->hotel->nama_hotel,
-        'Harga Supir'=> $this->harga_supir,
-        'Harga Tour Guide'=> $this->harga_tour_guide,
-        'Detail Paket Wisata'=>$paketdetail, 
+        $paketdetail = PaketDetailResource::collection(PaketDetail::all());
+
+        return[
+        'id' => $this->id,
+        'nama_paket' => $this->nama_paket,
+        'deskripsi_paket' => $this->deskripsi,
+        'harga_paket' => $this->harga_tx,
+        'gambar_paket' => $this->url_image,
+        'nama_mobil' => $this->mobil->nama_mobil,
+        'hotel' => $this->hotel->nama_hotel,
+        'harga_supir' => $this->harga_supir_tx,
+        'harga_tour_guide' => $this->harga_tour_guide_tx,
+        'detail_paket_wisata' => $paketdetail,
        ];
     }
 }

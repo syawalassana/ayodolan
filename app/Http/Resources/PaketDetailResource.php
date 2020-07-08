@@ -15,11 +15,11 @@ class PaketDetailResource extends JsonResource
     public function toArray($request)
     {
         return[
-            'id'=> $this->id,
-            'nama paket wisata'=> $this->paket_id,
-            'nama objek Wisata'=> $this->obj_wisata_id,
-            'mulai'=> $this->start,
-            'selesai'=> $this->end,
+            'id' => $this->id,
+            'wisata' => $this->objekWisata->nama_wisata,
+            'gambar' => $this->objekWisata->url_image,
+            'mulai' => $this->start,
+            'selesai' => $this->end,
            ];
     }
 }

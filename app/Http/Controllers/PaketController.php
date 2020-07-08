@@ -112,7 +112,7 @@ class PaketController extends Controller
      * @param  \App\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paket $id)
+    public function edit($id)
     {
         $paket = Paket::find($id);
 
