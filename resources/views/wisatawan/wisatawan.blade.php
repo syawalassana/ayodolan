@@ -3,10 +3,9 @@
 
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Bordered Table</h3>
+      <h3 class="box-title">Data Wisatawan</h3>
       <div class="box-tools">
         <div class="form-group">
-          <a class="btn btn-success" href="/wisatawan/create"> <i class="fa fa-plus"></i> Tambah Data</a>
         </div>
       </div>
     </div>
@@ -30,7 +29,6 @@
         <td>{{$row->alamat}}</td>
         <td><img width="100" src="/fotowisatawan/{{$row->foto }}"/></td>
         <td>{{$row->telpon}}</td>
-        <td><a class="btn btn-warning" href="/wisatawan/{{$row->id}}/edit">Update</a></td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/wisatawan/{{$row->id}}" method="post">
             @csrf

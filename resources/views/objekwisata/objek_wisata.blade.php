@@ -3,7 +3,7 @@
 
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Bordered Table</h3>
+      <h3 class="box-title">Halaman Objek Wisata</h3>
       <div class="box-tools">
         <div class="form-group">
           <a class="btn btn-success" href="/objek-wisata/create"> <i class="fa fa-plus"></i> Tambah Data</a>
