@@ -81,7 +81,7 @@
     <div class="col-md-6">
         <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Gambar Mobil</h3>
+              <h3 class="box-title">Data Mobil</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -113,7 +113,7 @@
     <div class="col-md-6">
         <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Gambar Hotel</h3>
+              <h3 class="box-title">Data Hotel</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

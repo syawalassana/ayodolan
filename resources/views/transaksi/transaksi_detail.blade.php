@@ -53,7 +53,7 @@
             <h3 class="box-title">Detail Wisatawan</h3>
             <div class="box-tools">
                 <div class="form-group">
-                    <a class="btn btn-success" href="/tambah-detail-wisatawan/{{$data->id}}"> <i class="fa fa-plus"></i>Tambah Data Wisatawan</a>
+                  
                 </div>
             </div>
         </div>
