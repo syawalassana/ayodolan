@@ -116,7 +116,11 @@ class PaketController extends Controller
     {
         $paket = Paket::find($id);
 
-        return view('paket.paket_edit', ['data' => $paket]);
+        return view('paket.paket_edit', [
+            'data' => $paket,
+            'mobil' => Mobil::all(),
+            'hotel' => Hotel::all(),
+        ]);
     }
 
     /**
@@ -134,22 +138,18 @@ class PaketController extends Controller
 
         ];
         $validator = Validator::make($request->all(), [
-            'nama_wisata' => 'required', //data tidak boleh kosong
+            'nama_paket' => 'required', //data tidak boleh kosong
             'deskripsi' => 'required',
             'harga' => 'numeric|required',
-            'gambar_paket' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar_paket' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
             'mobil_id' => 'required|numeric',
             'hotel_id' => 'required|numeric',
-            'lama_liburan' => 'required',
             'harga_supir' => 'required|numeric',
             'harga_tour_guide' => 'required|numeric',
-            'obj_wisata_id' => 'required',
-            'gambar_paket' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-            'lama_kunjungan' => 'required',
         ], $messages
     );
         if ($validator->fails()) {
-            return redirect('/paket/edit')
+            return redirect('/paket/' . $id . '/edit')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -157,10 +157,6 @@ class PaketController extends Controller
         $data_paket->nama_paket = $request->nama_paket;
         $data_paket->deskripsi = $request->deskripsi;
         $data_paket->harga = $request->harga;
-        $gambar = $request->file('gambar_paket');
-        $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
-        $tujuan_upload = 'paket';
-        $gambar->move($tujuan_upload, $nama_gambar);
         if ($request->has('gambar_paket')) {
             $gambar = $request->file('gambar_paket');
             $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
@@ -175,17 +171,16 @@ class PaketController extends Controller
         }
         $data_paket->mobil_id = $request->mobil_id;
         $data_paket->hotel_id = $request->hotel_id;
-        $data_paket->lama_liburan = $request->lama_liburan;
         $data_paket->harga_supir = $request->harga_supir;
         $data_paket->harga_tour_guide = $request->harga_tour_guide;
         $data_paket->save();
-        $data_paketdetail = new PaketDetail;
+        /* $data_paketdetail = new PaketDetail;
         $data_paketdetail->id = $request->id;
         $data_paketdetail->obj_wisata_id = $request->obj_wisata_id;
         $data_paketdetail->lama_kunjungan = $request->lama_kunjungan;
-        $data_paketdetail->save();
-        if ($data_paket && $data_paketdetail) {
-            return redirect('/paket');
+        $data_paketdetail->save(); */
+        if ($data_paket) {
+            return redirect('/paket/' . $data_paket->id);
         }
     }
 
