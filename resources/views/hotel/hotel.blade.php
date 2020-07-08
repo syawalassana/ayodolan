@@ -16,7 +16,7 @@
       <tr>
         <th>No</th>
         <th>Nama hotel</th>
-        <th>Alamat</th>
+        <th>Gmap</th>
         <th>Gambar Kamar</th>
         <th class="text-center" colspan="3">OPSI</th>
       </tr>
@@ -25,7 +25,7 @@
       <td>{{$key+1}}</td>
         <td>{{$row->nama_hotel}}</td>
         <td>{{$row->gmap}}</td>
-        <td><img width="100" src="/hotel/{{$row->foto_hotel}}"/></td>
+        <td><img width="100" src="{{$row->url_image}}"/></td>
         <td></td>
         <td></td>
         <td><a class="btn btn-warning" href="/hotel/{{$row->id}}/edit">Update</a></td>
@@ -51,6 +51,6 @@
 
 
     <table border="1">
-     
+
     </table>
 @endsection

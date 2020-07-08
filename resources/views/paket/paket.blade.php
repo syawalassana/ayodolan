@@ -25,8 +25,8 @@
       <tr>
       <td>{{$key+1}}</td>
         <td>{{$row->nama_paket}}</td>
-        <td>{{$row->harga}}</td>
-        <!-- <td><img width="100" src="/paket/{{$row->gambar_paket}}"/></td> -->
+        <td>{{$row->harga_tx}}</td>
+        <td><img width="100" src="{{$row->url_image}}"/></td>
         <td>{{$row->lama_liburan}}</td>
         <td><a class="btn btn-warning" href="/paket/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/paket/{{$row->id}}">Lihat</a></td>
@@ -51,6 +51,6 @@
 
 
     <table border="1">
-     
+
     </table>
 @endsection

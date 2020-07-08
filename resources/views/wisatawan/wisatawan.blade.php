@@ -27,7 +27,7 @@
         <td>{{$row->user->name}}</td>
         <td>{{$row->tanggal_lahir}}</td>
         <td>{{$row->alamat}}</td>
-        <td><img width="100" src="/fotowisatawan/{{$row->foto }}"/></td>
+        <td><img width="100" src="{{$row->url_image }}"/></td>
         <td>{{$row->telpon}}</td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/wisatawan/{{$row->id}}" method="post">
@@ -50,6 +50,6 @@
 
 
     <table border="1">
-     
+
     </table>
 @endsection

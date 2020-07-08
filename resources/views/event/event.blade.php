@@ -24,10 +24,10 @@
       @foreach ($data as $key=>$row)
       <tr>
       <td>{{$key+1}}</td>
-        <td>{{$row -> nama_event}}</td>
-        <td>{{$row -> tgl_event}}</td>
-        <td>{{$row -> lokasi}}</td>
-        <td><img width="100" src="/event/{{$row->gambar_event}}"/></td>
+        <td>{{$row->nama_event}}</td>
+        <td>{{$row->tgl_event_tx}}</td>
+        <td>{{$row->lokasi}}</td>
+        <td><img width="100" src="{{$row->url_image}}"/></td>
         <td><a class="btn btn-warning" href="/event/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/event/{{$row->id}}">Detail</a></td>
         <td>
@@ -51,6 +51,6 @@
 
 
     <table border="1">
-     
+
     </table>
 @endsection

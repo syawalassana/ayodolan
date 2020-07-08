@@ -36,22 +36,22 @@
       </div>
       <div class="form-group">
             <label>Tipe Objek Wisata</label>
-            <select name="tipe_wisata" class="form_control">
+            <select name="tipe_wisata" class="form-control">
                 <option value="Pantai"{{old('tipe_wisata')=='Pantai'?'selected':''}}>Pantai</option>
                 <option value="Gunung"{{old('tipe_wisata')=='Gunung'?'selected':''}}>Gunung</option>
                 <option value="Goa"{{old('tipe_wisata')=='Goa'?'selected':''}}>Goa</option>
-                <option value="Goa"{{old('tipe_wisata')=='Sungai'?'selected':''}}>Goa</option>
+                <option value="Goa"{{old('tipe_wisata')=='Sungai'?'selected':''}}>Sungai</option>
              </select>
      </div>
      <div class="form-group">
             <label>Ciri Khas Objek Wisata</label>
             <input type="text" name="ciri_khas" value="{{old('ciri_khas')}}" class="form-control" placeholder="Ciri Khas Objek Wisata">
-    </div>   
+    </div>
       <div class="form-group">
         <label>Diskripsi Objek Wisata</label>
         <textarea name="deskripsi" class="form-control" placeholder="Masukan Diskripsi" >{{old('deskripsi')}}</textarea>
       </div>
-      
+
     </div>
     <div class="box-footer">
     <input class="btn btn-primary" type="submit" value="Tambah">

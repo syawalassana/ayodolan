@@ -7,7 +7,6 @@ use App\PaketDetail;
 use Illuminate\Http\Request;
 use App\Paket;
 use Illuminate\Support\Facades\Validator;
-use App\GambarWisata;
 
 class PaketDetailController extends Controller
 {
@@ -19,9 +18,10 @@ class PaketDetailController extends Controller
     public function index()
     {
         $items = [
-            'data'=>PaketDetail::orderBy('id')->paginate()
+            'data' => PaketDetail::orderBy('id')->paginate(),
         ];
-        return view('paket.paket_detail',$items);
+
+        return view('paket.paket_detail', $items);
     }
 
     /**
@@ -31,7 +31,6 @@ class PaketDetailController extends Controller
      */
     public function create()
     {
-       
     }
 
     /**
@@ -41,32 +40,32 @@ class PaketDetailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
+        // return $request->all();
         $messages = [
             'required' => ':attribute Tidak Boleh Kosong',
 
         ];
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'obj_wisata_id' => 'required',
             'start' => 'required',
             'end' => 'required',
-        ],$messages
+        ], $messages
     );
-        if ($validator->fails()){
-            
-            return redirect('/tambah-wisata/'.$request->paket_id)
+        if ($validator->fails()) {
+            return redirect('/tambah-wisata/' . $request->paket_id)
                     ->withErrors($validator)
                     ->withInput();
         }
-    $data_paketdetail = new PaketDetail;
-    $data_paketdetail->obj_wisata_id=$request->obj_wisata_id;
-    $data_paketdetail->paket_id=$request->paket_id;
-    $data_paketdetail->start=$request->start;
-    $data_paketdetail->end=$request->end;
-    $data_paketdetail->save();
-    if($data_paketdetail){
-        return redirect('/paket/'.$data_paketdetail->paket_id);
-    }
+        $data_paketdetail = new PaketDetail;
+        $data_paketdetail->obj_wisata_id = $request->obj_wisata_id;
+        $data_paketdetail->paket_id = $request->paket_id;
+        $data_paketdetail->start = $request->start;
+        $data_paketdetail->end = $request->end;
+        $data_paketdetail->save();
+        if ($data_paketdetail) {
+            return redirect('/paket/' . $data_paketdetail->paket_id);
+        }
     }
 
     /**
@@ -77,7 +76,6 @@ class PaketDetailController extends Controller
      */
     public function show(PaketDetail $paketDetail)
     {
-
     }
 
     /**
@@ -88,7 +86,6 @@ class PaketDetailController extends Controller
      */
     public function edit(PaketDetail $id)
     {
-           
     }
 
     /**
@@ -111,16 +108,20 @@ class PaketDetailController extends Controller
     public function destroy(PaketDetail $id)
     {
     }
-    function tambahWisata($id){
-        $data=[
-            'objekWisata'=>ObjekWisata::all(),
-            'data'=>Paket::find($id),
+    public function tambahWisata($id)
+    {
+        $data = [
+            'objekWisata' => ObjekWisata::all(),
+            'data' => Paket::find($id),
         ];
-       return view ('paket.tambah_objek_wisata', $data);
+
+        return view('paket.tambah_objek_wisata', $data);
     }
-    function hapusWisata($id){
+    public function hapusWisata($id)
+    {
         $paketdetail = PaketDetail::find($id);
         $paketdetail->delete();
-        return redirect("/paket/".$id);
+
+        return redirect('/paket/' . $id);
     }
 }

@@ -22,12 +22,13 @@ use Illuminate\Support\Facades\Auth;
 //Route::get('/', 'FrontController@index');
 
 Auth::routes();
-Route::get('/', 'FrontController@index');
+
 //Middleware
 Route::middleware(['admin'])->group(function () {
     Route::resource('/objek-wisata', 'ObjekWisataController');
-    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index');
+    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     Route::resource('/wisatawan', 'WisatawanController');
     Route::resource('/event', 'EventController');
     Route::resource('/hotel', 'HotelController');

@@ -15,7 +15,7 @@
   </div>
   <!-- /.box-header -->
   <!-- form start -->
-  <form action="/paket/" method="post" enctype="multipart/form-data">
+  <form action="/paket" method="post" enctype="multipart/form-data">
   @csrf
     <div class="box-body">
       <div class="form-group">

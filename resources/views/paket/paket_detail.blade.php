@@ -23,15 +23,15 @@
             </tr>
             <tr>
                 <th>Lama Liburan</th>
-                <td>{{$data->lama_liburan}}</td>
+                <td>{{$data->lama_liburan}} Hari</td>
             </tr>
             <tr>
                 <th>Harga Supir</th>
-                <td>{{$data->harga_supir}}</td>
+                <td>{{$data->harga_supir_tx}}</td>
             </tr>
             <tr>
                 <th>Harga Tour Guide</th>
-                <td>{{$data->harga_tour_guide}}</td>
+                <td>{{$data->harga_tour_guide_tx}}</td>
             </tr>
         </table>
     </div>
@@ -96,7 +96,7 @@
                 </tr>
                 <tr>
                     <th>Harga Sewa</th>
-                    <td>{{$data->mobil->harga_sewa}}</td>
+                    <td>{{$data->mobil->harga_sewa_tx}}</td>
                 </tr>
                 <tr>
                     <th>Foto Mobil</th>
@@ -124,7 +124,7 @@
                 </tr>
                 <tr>
                     <th>Harga</th>
-                    <td>{{$data->hotel->harga}}</td>
+                    <td>{{$data->hotel->harga_tx}}</td>
                 </tr>
                 <tr>
                     <th>Alamat</th>
