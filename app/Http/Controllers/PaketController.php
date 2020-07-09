@@ -171,6 +171,7 @@ class PaketController extends Controller
         }
         $data_paket->mobil_id = $request->mobil_id;
         $data_paket->hotel_id = $request->hotel_id;
+        $data_paket->lama_liburan = $request->lama_liburan;
         $data_paket->harga_supir = $request->harga_supir;
         $data_paket->harga_tour_guide = $request->harga_tour_guide;
         $data_paket->save();

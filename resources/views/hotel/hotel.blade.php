@@ -18,7 +18,7 @@
         <th>Nama hotel</th>
         <th>Gmap</th>
         <th>Gambar Kamar</th>
-        <th class="text-center" colspan="3">OPSI</th>
+        <th class="text-center" colspan="5">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
       <tr>
@@ -26,8 +26,6 @@
         <td>{{$row->nama_hotel}}</td>
         <td>{{$row->gmap}}</td>
         <td><img width="100" src="{{$row->url_image}}"/></td>
-        <td></td>
-        <td></td>
         <td><a class="btn btn-warning" href="/hotel/{{$row->id}}/edit">Update</a></td>
         <td><a class="btn btn-info" href="/hotel/{{$row->id}}">Detail</a></td>
         <td>

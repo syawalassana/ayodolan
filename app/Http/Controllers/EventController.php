@@ -48,7 +48,7 @@ class EventController extends Controller
         $validator = Validator::make($request->all(),[
             'nama_event'=> 'required', //data tidak boleh kosong
             'lokasi' => 'required',
-            'gambar_event' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar_event' => 'nullable|file|image|mimes:jpeg,png,jpg|max:5048',
             'deskripsi_event' => 'required',
         ],$messages
     );

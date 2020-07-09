@@ -54,6 +54,10 @@
             </select>
           </div>
           <div class="form-group">
+            <label>lama liburan</label>
+            <input type="text" name="lama_liburan" value="{{$data->lama_liburan}}" placeholder="Lama Liburan" class="form-control">
+          </div>
+          <div class="form-group">
             <select name="hotel_id" id="hotel_id" class="form-control">
                 <option value="">Pilih Hotel</option>
                 @foreach ($hotel as $row)
