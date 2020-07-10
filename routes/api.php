@@ -25,6 +25,9 @@ Route::namespace('Api')->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::post('logout', 'UserController@logout');
         Route::post('invoice', 'PaketController@invoice');
+        Route::get('invoice/{id}', 'PaketController@detailInvoice');
+        Route::get('my-invoice', 'MyBookingController@index');
+        Route::get('my-invoice-cancel/{id}', 'MyBookingController@cancel');
     });
 });
 
