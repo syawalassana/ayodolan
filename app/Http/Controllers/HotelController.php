@@ -61,11 +61,14 @@ class HotelController extends Controller
             $data_hotel->nama_hotel=$request->nama_hotel;
             $data_hotel->harga=$request->harga;
             $data_hotel->alamat=$request->alamat;
-            $gambar = $request->file('foto_hotel');
-            $nama_gambar = time()."_".$gambar->getClientOriginalName();
-            $tujuan_upload = 'hotel';
-            $gambar->move($tujuan_upload,$nama_gambar);
-            $data_hotel->foto_hotel = $nama_gambar;
+            if($request->has('foto_hotel')){
+                $gambar = $request->file('foto_hotel');
+                $nama_gambar = time()."_".$gambar->getClientOriginalName();
+                // isi nama dengan nama folder tempat kemana kamu file diupload
+                $tujuan_upload = 'hotel';
+                $gambar->move($tujuan_upload,$nama_gambar);
+                $data_hotel->foto_hotel=$nama_gambar;
+            }   
             $data_hotel->gmap=$request->gmap;
             $data_hotel->no_telepon=$request->no_telepon;
             $data_hotel->save();

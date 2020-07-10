@@ -74,11 +74,14 @@ class PaketController extends Controller
         $data_paket->nama_paket = $request->nama_paket;
         $data_paket->deskripsi = $request->deskripsi;
         $data_paket->harga = $request->harga;
-        $gambar = $request->file('gambar_paket');
-        $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
-        $tujuan_upload = 'paket';
-        $gambar->move($tujuan_upload, $nama_gambar);
-        $data_paket->gambar_paket = $request->gambar_paket;
+        if ($request->has('gambar_paket')) {
+            $gambar = $request->file('gambar_paket');
+            $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'paket';
+            $gambar->move($tujuan_upload, $nama_gambar);
+            $data_paket->gambar_paket= $nama_gambar;
+            }
         $data_paket->mobil_id = $request->mobil_id;
         $data_paket->hotel_id = $request->hotel_id;
         $data_paket->lama_liburan = $request->lama_liburan;
@@ -167,7 +170,7 @@ class PaketController extends Controller
                 //skrip untuk menghapus data foto lama yang di update
                 unlink('objekwisata/' . $data_paket->gambar_paket);
             }
-            $data_paket->gambar = $nama_gambar;
+            $data_paket->gambar_paket = $nama_gambar;
         }
         $data_paket->mobil_id = $request->mobil_id;
         $data_paket->hotel_id = $request->hotel_id;

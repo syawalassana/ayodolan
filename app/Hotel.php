@@ -14,7 +14,7 @@ class Hotel extends Model
     public function getUrlImageAttribute()
     {
         if($this->foto_hotel){
-            return asset("hote/".$this->foto_hotel);
+            return asset("hotel/".$this->foto_hotel);
         }
         return asset(DEFAULT_IMAGE);
     }
