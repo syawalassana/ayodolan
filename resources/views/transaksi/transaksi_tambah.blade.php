@@ -45,8 +45,8 @@
                     <input type="text" name="jumlah_peserta" value="{{old('jumlah_peserta')}}" class="form-control"  placeholder="Masukan jumlah peserta">
             </div>
       <div class="form-group">
-        <label for="tanggal_liburan">Tanggal dan Jam:</label>
-        <input type="datetime-local" id="tanggal_liburan" name="tanggal_liburan" value="{{old('tanggal_liburan')}}" placeholder="Masukkan Tanggal Berlibur" class="form-control">
+        <label for="tanggal_liburan">Tanggal</label>
+        <input type="date" id="tanggal_liburan" name="tanggal_liburan" value="{{old('tanggal_liburan')}}" placeholder="Masukkan Tanggal Berlibur" class="form-control">
       </div>
     </div>
     <div class="box-footer">

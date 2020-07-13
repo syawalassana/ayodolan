@@ -86,9 +86,15 @@ class TransaksiController extends Controller
      * @param  \App\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksi $transaksi)
+    public function edit(Transaksi $id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+
+        return view('transaksi.transaksi_edit', [
+            'data' => $transaksi,
+            'user'=>User::where('role_id',2)->get(),
+            'paket'=>Paket::all(),
+        ]);
     }
 
     /**
@@ -100,7 +106,24 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, Transaksi $transaksi)
     {
-        //
+        
+        $paket=Paket::find($request->paket_id);
+        $data_transaksi = new Transaksi;
+        $data_transaksi->nomor_invoice=$request->nomor_invoice;
+        $data_transaksi->user_id=$request->user_id;
+        $data_transaksi->paket_id=$request->paket_id;
+        $data_transaksi->jumlah_peserta=$request->jumlah_peserta;
+        $data_transaksi->tanggal_liburan=$request->tanggal_liburan;
+
+        $data_transaksi->harga_supir=$paket->harga_supir;
+        $data_transaksi->harga_tour_guide=$paket->harga_tour_guide;
+        $data_transaksi->harga=$paket->harga;
+        $data_transaksi->total_transaksi=(($paket->harga_supir+$paket->harga_tour_guide+$paket->harga)*$data_transaksi->jumlah_peserta*1.2);
+        $data_transaksi->status=$request;
+        $data_transaksi->save();
+        if ($data_transaksi) {
+            return redirect('/transaksi');
+        }
     }
 
     /**
