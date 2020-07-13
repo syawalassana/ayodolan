@@ -9,7 +9,16 @@ class Transaksi extends Model
 {
     protected $table = 'transaksi';
 
-    protected $appends = ['harga_tx','harga_supir_tx','harga_tour_guide_tx','total_transaksi_tx'];
+    protected $appends = ['harga_tx','harga_supir_tx','harga_tour_guide_tx','total_transaksi_tx','tanggal_liburan_tx'];
+
+    public function getTanggalLiburanTxAttribute()
+    {
+        if ($this->tanggal_liburan) {
+            return date('d-m-Y', strtotime($this->tanggal_liburan));
+        }
+
+        return '';
+    }
 
     public function getTotalTransaksiTxAttribute()
     {

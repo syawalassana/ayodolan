@@ -17,7 +17,9 @@
         <th>Nama Wisatawan</th>
         <th>Nama Paket</th>
         <th>Jumlah Peserta</th>
-        <th class="text-center" colspan="2">OPSI</th>
+        <th>Status Pembayaran</th>
+        <th>Tanggal Invoice</th>
+        <th class="text-center">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
       <tr>
@@ -26,8 +28,9 @@
         <td>{{$row->user->name}}</td>
         <td>{{$row->paket->nama_paket}}</td>
         <td>{{$row->jumlah_peserta}}</td>
+        <td>{{$row->status}}</td>
+        <td>{{$row->created_at->format('d-m-Y H:i')}}</td>
         <td><a class="btn btn-info" href="/transaksi/{{$row->id}}">Lihat</a></td>
-        <td><a class="btn btn-warning" href="/transaksi/{{$row->id}}/edit">Update</a></td>
         <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/paket/{{$row->id}}" method="post">
             @csrf
@@ -47,6 +50,6 @@
 
 
     <table border="1">
-     
+
     </table>
 @endsection

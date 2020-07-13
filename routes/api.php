@@ -28,6 +28,7 @@ Route::namespace('Api')->group(function () {
         Route::get('invoice/{id}', 'PaketController@detailInvoice');
         Route::get('my-invoice', 'MyBookingController@index');
         Route::get('my-invoice-cancel/{id}', 'MyBookingController@cancel');
+        Route::get('user-active', 'UserController@currentUser');
     });
 });
 

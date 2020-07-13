@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
 use App\Wisatawan;
@@ -54,6 +55,9 @@ class UserController
                 //masuk table wisatawan
                 $data_wisatawan = new Wisatawan;
                 $data_wisatawan->user_id = $users->id;
+                $data_wisatawan->alamat = '-';
+                $data_wisatawan->telpon = '-';
+                $data_wisatawan->foto = '';
                 $data_wisatawan->save();
 
                 DB::commit();
@@ -76,7 +80,7 @@ class UserController
             DB::rollback();
 
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'data' => '',
                 'message' => $e->getMessage(),
             ]);
@@ -116,7 +120,7 @@ class UserController
     public function logout()
     {
         $u = Auth::guard('api')->user();
-        $u->api_token = '';
+        $u->api_token = null;
         $u->save();
 
         return response()->json([
@@ -131,5 +135,19 @@ class UserController
         $u = Auth::guard('api')->user();
 
         return $u;
+    }
+
+    public function currentUser()
+    {
+        $user = Auth::guard('api')->user();
+
+        $u = new UserResource($user);
+
+        return response()->json([
+            'error' => [],
+            'status' => true,
+            'data' => $u,
+            'message' => 'data user wisatawan',
+        ]);
     }
 }
