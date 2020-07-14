@@ -6,7 +6,7 @@
       <h3 class="box-title">Detail Objek Wisata</h3>
       <div class="box-tools">
         <div class="form-group">
-          <a class="btn btn-warning" href="/objekwisata"> <i class="fa fa-arrow-left"></i> Kembali </a>
+          <a class="btn btn-warning" href="/objek-wisata"> <i class="fa fa-arrow-left"></i> Kembali </a>
         </div>
       </div>
     </div>

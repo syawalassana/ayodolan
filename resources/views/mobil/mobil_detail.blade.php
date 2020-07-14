@@ -3,7 +3,7 @@
 
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Detail Mobil</h3>
+      <h3 class="box-title">Halaman Detail Mobil</h3>
       <div class="box-tools">
         <div class="form-group">
           <a class="btn btn-warning" href="/mobil"> <i class="fa fa-arrow-left"></i> Kembali </a>
@@ -31,7 +31,7 @@
 </div>
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Gambar Mobil</h3>
+      <h3 class="box-title">Gambar Detail Mobil</h3>
       <div class="box-tools">
         <div class="form-group">
           <a class="btn btn-success" href="/mobil-gambar/{{$data->id}}"> <i class="fa fa-plus"></i>Tambah Gambar</a>

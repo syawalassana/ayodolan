@@ -11,7 +11,7 @@
 @endif
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Form Data Hotel</h3>
+    <h3 class="box-title">Halaman Edit Data Mobil</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
@@ -51,7 +51,7 @@
     </div>
     <div class="box-footer">
     <input class="btn btn-primary" type="submit" value="Update">
-       <a href="/hotel"><button type="button">Kembali</button></a>
+    <a class="btn btn-warning" href="/mobil"> <i class="fa fa-arrow-left"></i> Kembali </a>
     </div>
   </form>
 </div>
