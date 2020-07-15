@@ -6,6 +6,7 @@
       <h3 class="box-title">Halaman Transaksi</h3>
       <div class="box-tools">
         <a class="btn btn-success" href="/transaksi/create"> <i class="fa fa-plus"></i> Tambah Data</a>
+        <tr></tr>
       </div>
     </div>
     <!-- /.box-header -->
@@ -28,7 +29,6 @@
         <td>{{$row->jumlah_peserta}}</td>
         <td><a class="btn btn-info" href="/transaksi/{{$row->id}}">Lihat</a></td>
         <td><a class="btn btn-warning" href="/transaksi/{{$row->id}}/edit">Update</a></td>
-        <td>
           <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/paket/{{$row->id}}" method="post">
             @csrf
           </form>
@@ -42,11 +42,5 @@
             {{ $data->links() }}
     </div>
   </div>
-
-
-
-
-    <table border="1">
-     
     </table>
 @endsection
