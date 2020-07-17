@@ -36,7 +36,7 @@
     </div>
     <div class="form-group">
         <label>Kapasitas Mobil</label>
-        <input type="text" name="kapasitas" value="{{$data->kapasitas}}" class="form-control" name="lokasi" placeholder="Kapasitas Mobil">
+        <input type="text" name="kapasitas" value="{{$data->kapasitas}}" class="form-control" placeholder="Kapasitas Mobil">
       </div>
       <div class="form-group">
         <label>Harga Sewa Mobil</label>

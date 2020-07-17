@@ -15,7 +15,7 @@
       <table class="table table-bordered">
       <tr>
         <th>No</th>
-        <th>Nama Makanan</th>
+        <th>Nama Makanan </th>
         <th>Deskripsi</th>
         <th>Gambar</th>
         <th class="text-center" colspan="3">OPSI</th>
@@ -27,9 +27,8 @@
         <td>{{$row->deskripsi}}</td>
         <td><img width="100" src="{{$row->makanan}}"/></td>
         <td><a class="btn btn-warning" href="/makanan/{{$row->id}}/edit">Update</a></td>
-        <td><a class="btn btn-info" href="/mobil/{{$row->id}}">Detail</a></td>
         <td>
-          <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/mobil/{{$row->id}}" method="post">
+          <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/makanan/{{$row->id}}" method="post">
             @csrf
           <input name="_method" type="hidden" value="DELETE">
             <button class="btn btn-danger" type="submit">Delete</button>

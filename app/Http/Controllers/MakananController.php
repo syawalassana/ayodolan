@@ -16,7 +16,7 @@ class MakananController extends Controller
     public function index()
     {
         $items=[
-            'data' => Makanan::orderBy('nama_makanan')->paginate()
+            'data' => Makanan::orderBy('nama_makanan')->paginate(),
         ];
         return view('makanan.makanan',$items);
     }
@@ -50,7 +50,7 @@ class MakananController extends Controller
         ], $messages
     );
         if ($validator->fails()) {
-            return redirect('/event/create')
+            return redirect('/makanan/create')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -88,9 +88,10 @@ class MakananController extends Controller
      * @param  \App\Makanan  $makanan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Makanan $makanan)
-    {
-        //
+    public function edit($id)
+    {   
+      $makanan = Makanan::find($id);
+      return view('makanan.makanan_edit', ['data'=>$makanan]);
     }
 
     /**
@@ -100,9 +101,39 @@ class MakananController extends Controller
      * @param  \App\Makanan  $makanan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Makanan $makanan)
+    public function update(Request $request, $id)
     {
-        //
+        $messages = [
+            'required' => ':attribute Tidak Boleh Kosong',
+            'numeric' => ':attribute harus angka',
+
+        ];
+        $validator = Validator::make($request->all(),[
+            'nama_makanan' => 'required', //data tidak boleh kosong
+            'deskripsi' => 'required',
+            'gambar_makanan' => 'nullable|file|image|mimes:jpeg,png,jpg|max:5048',
+        ],$messages
+    );
+        if ($validator->fails()){
+          return redirect('makanan/'.$id.'/edit')
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $data_makanan = Makanan::find($id);
+        $data_makanan->nama_makanan = $request->nama_makanan;
+        $data_makanan->deskripsi = $request->deskripsi;
+        if ($request->has('gambar')) {
+            $gambar = $request->file('gambar');
+            $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
+            // isi nama dengan nama folder tempat kemana kamu file diupload
+            $tujuan_upload = 'makanan';
+            $gambar->move($tujuan_upload, $nama_gambar);
+            $data_makanan->gambar = $nama_gambar;
+        }
+        $data_makanan->save();
+        if ($data_makanan) {
+            return redirect('/makanan');
+        }
     }
 
     /**
@@ -111,8 +142,10 @@ class MakananController extends Controller
      * @param  \App\Makanan  $makanan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Makanan $makanan)
+    public function destroy($id)
     {
-        
+     $makanan = Makanan::find($id);
+     $makanan->delete();   
+     return redirect('/makanan');
     }
 }

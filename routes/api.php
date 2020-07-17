@@ -21,6 +21,7 @@ Route::namespace('Api')->group(function () {
     Route::post('login', 'UserController@login');
     Route::get('paket', 'PaketController@index');
     Route::get('paket/{id}', 'PaketController@detail');
+    Route::get('makanan', 'MakananController@index');
 
     Route::middleware('auth:api')->group(function () {
         Route::post('logout', 'UserController@logout');

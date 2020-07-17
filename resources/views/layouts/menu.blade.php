@@ -36,7 +36,7 @@
             <li class="{{Ayo::set_active('hotel*')}}"><a href="/hotel"><i class="fa fa-hotel"></i>Data Hotel</a></li>
             <li class="{{Ayo::set_active('mobil*')}}"><a href="/mobil"><i class="fa fa-car"></i>Data Mobil</a></li>
             <li class="{{Ayo::set_active('paket*')}}"><a href="/paket"><i class="fa fa-diamond"></i>Data Paket Wisata</a></li>
-            <li class="{{Ayo::set_active('makanan*')}}"><a href="/makanan"><i class="fa-food"></i>Data Makanan Khas Pacitan</a></li>
+            <li class="{{Ayo::set_active('makanan*')}}"><a href="/makanan"><i class="fa fa-cutlery"></i>Data Makanan Khas Pacitan</a></li>
             <li class="{{Ayo::set_active('transaksi*')}}"><a href="/transaksi"><i class="fa fa-dollar"></i>Data Transaksi</a></li>
             <li class="{{Ayo::set_active('laporan*')}}"><a href="/laporan"><i class="fa fa-area-chart"></i>Laporan</a></li>
 

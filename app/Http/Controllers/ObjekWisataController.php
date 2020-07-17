@@ -193,7 +193,6 @@ class ObjekWisataController extends Controller
 
     public function tambah_gambar($id)
     {
-        
         $items=[
             'data'=>ObjekWisata::find($id)
         ];
