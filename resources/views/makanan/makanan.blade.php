@@ -3,10 +3,10 @@
 
 <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Halaman Event Kota</h3>
+      <h3 class="box-title">Data Makanan</h3>
       <div class="box-tools">
         <div class="form-group">
-          <a class="btn btn-success" href="/event/create"> <i class="fa fa-plus"></i> Tambah Data</a>
+          <a class="btn btn-success" href="/makanan/create"> <i class="fa fa-plus"></i> Tambah Data</a>
         </div>
       </div>
     </div>
@@ -15,23 +15,20 @@
       <table class="table table-bordered">
       <tr>
         <th>No</th>
-        <th>Nama Event</th>
-        <th>Tanggal Event</th>
-        <th>Lokasi</th>
-        <th>Gambar Event</th>
+        <th>Nama Makanan </th>
+        <th>Deskripsi</th>
+        <th>Gambar</th>
         <th class="text-center" colspan="3">OPSI</th>
       </tr>
       @foreach ($data as $key=>$row)
       <tr>
       <td>{{$key+1}}</td>
-        <td>{{$row->nama_event}}</td>
-        <td>{{$row->tgl_event_tx}}</td>
-        <td>{{$row->lokasi}}</td>
-        <td><img width="100" src="{{$row->url_image}}"/></td>
-        <td><a class="btn btn-warning" href="/event/{{$row->id}}/edit">Update</a></td>
-        <td><a class="btn btn-info" href="/event/{{$row->id}}">Detail</a></td>
+        <td>{{$row->nama_makanan}}</td>
+        <td>{{$row->deskripsi}}</td>
+        <td><img width="100" src="{{$row->makanan}}"/></td>
+        <td><a class="btn btn-warning" href="/makanan/{{$row->id}}/edit">Update</a></td>
         <td>
-          <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/event/{{$row->id}}" method="post">
+          <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/makanan/{{$row->id}}" method="post">
             @csrf
           <input name="_method" type="hidden" value="DELETE">
             <button class="btn btn-danger" type="submit">Delete</button>

@@ -11,7 +11,7 @@
 @endif
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Form Edit Paket</h3>
+    <h3 class="box-title">Halaman Edit Data Paket</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
@@ -53,17 +53,17 @@
                 @endforeach
             </select>
           </div>
+          <select name="hotel_id" id="hotel_id" class="form-control">
+            <option value="">Pilih Hotel</option>
+            @foreach ($hotel as $row)
+                <option value="{{ $row->id }}" {{$data->hotel_id==$row->id?'selected':''}}>{{ $row->nama_hotel}}</option>
+            @endforeach
+        </select>
           <div class="form-group">
             <label>lama liburan</label>
             <input type="text" name="lama_liburan" value="{{$data->lama_liburan}}" placeholder="Lama Liburan" class="form-control">
           </div>
           <div class="form-group">
-            <select name="hotel_id" id="hotel_id" class="form-control">
-                <option value="">Pilih Hotel</option>
-                @foreach ($hotel as $row)
-                    <option value="{{ $row->id }}" {{$data->hotel_id==$row->id?'selected':''}}>{{ $row->nama_hotel}}</option>
-                @endforeach
-            </select>
             <div class="form-group">
                 <label>Biaya Tour Guide</label>
                 <input type="text" name="harga_tour_guide" value="{{$data->harga_tour_guide}}" class="form-control" placeholder="Harga Tour Guide">
@@ -76,7 +76,7 @@
   </div>
     <div class="box-footer">
     <input class="btn btn-primary" type="submit" value="Update">
-       <a href="/wisatawan"><button type="button">Kembali</button></a>
+    <a class="btn btn-warning" href="/paket"> <i class="fa fa-arrow-left"></i> Kembali </a>
     </div>
   </form>
 </div>

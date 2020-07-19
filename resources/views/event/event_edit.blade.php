@@ -11,7 +11,7 @@
 @endif
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Form Edit Event</h3>
+    <h3 class="box-title">Halaman Edit Data Event</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->

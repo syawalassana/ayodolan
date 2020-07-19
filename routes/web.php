@@ -34,6 +34,7 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('/hotel', 'HotelController');
     Route::resource('/mobil', 'MobilController');
     Route::resource('/paket', 'PaketController');
+    Route::resource('/makanan', 'MakananController');
     Route::resource('/transaksi', 'TransaksiController');
     Route::get('/mobil-gambar/{id}', 'MobilController@tambah_gambar');
     Route::post('mobil-gambar', 'GambarMobilController@store');
