@@ -15,21 +15,20 @@ class EventResource extends JsonResource
      */
     public function toArray($request)
     {
-        $gambardetail=[];     
+        $gambardetail = [];
         $gambardetailevent = GambarEvent::where('event_id', $this->id)->get();
-        foreach($gambardetailevent as $key=>$value){
-            $gambardetail[]=$value->path;
+        foreach ($gambardetailevent as $key => $value) {
+            $gambardetail[] = $value->path;
         }
-        
-        return [
-             'id'=> $this->id,
-             'nama_hotel'=> $this->nama_event,
-             'tanggal Mulai' => $this->tgl_event,
-             'lokasi'=> $this->lokasi,
-             'Gambar event'=> $this->gambar_event,
-             'deskripsi event'=> $this->deskripsi_event,
-             'gambar_detail'=> $gambardetail,
 
+        return [
+             'id' => $this->id,
+             'nama_event' => $this->nama_event,
+             'tanggal' => $this->tgl_event_tx,
+             'lokasi' => $this->lokasi,
+             'gambar_event' => $this->url_image,
+             'deskripsi_event' => $this->deskripsi_event,
+             'gambar_detail' => $gambardetail,
         ];
     }
 }

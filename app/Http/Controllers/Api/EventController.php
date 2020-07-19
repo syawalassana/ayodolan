@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Event;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
-    public function index(){
-        $data_event= EventResource::collection(Event::all());
+    public function index()
+    {
+        $e = Event::whereDate('tgl_mulai', '<=', Carbon::now())->whereDate('tgl_selesai', '>=', Carbon::now())->get();
+
+        $data_event = EventResource::collection($e);
+
         return response()->json([
             'error' => [],
             'status' => true,
