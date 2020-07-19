@@ -187,7 +187,7 @@ class UserController extends Controller
         $u->save();
         if ($u) {
             $w = Wisatawan::where('user_id', $u->id)->first();
-            $w->tanggal_lahir = $request->born;
+            $w->tanggal_lahir = date('Y-m-d', strtotime($request->born));
             $w->alamat = $request->address;
             $w->telpon = $request->phone;
             $w->save();

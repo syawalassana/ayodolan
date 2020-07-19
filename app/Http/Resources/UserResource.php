@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'phone' => $this->wisatawan->telpon,
             'address' => $this->wisatawan->alamat,
             'photo' => $this->url_image,
-            'born' => $this->wisatawan->tanggal_lahir,
+            'born' => $this->wisatawan->tanggal_lahir_tx,
         ];
     }
 }
