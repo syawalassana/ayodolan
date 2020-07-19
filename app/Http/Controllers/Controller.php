@@ -10,4 +10,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function delete_image($dir, $old)
+    {
+        if ($old != '' and file_exists($dir . '/' . $old)) {
+            unlink($dir . '/' . $old);
+        }
+
+        return true;
+    }
 }

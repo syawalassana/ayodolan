@@ -29,6 +29,8 @@ Route::namespace('Api')->group(function () {
         Route::get('my-invoice', 'MyBookingController@index');
         Route::get('my-invoice-cancel/{id}', 'MyBookingController@cancel');
         Route::get('user-active', 'UserController@currentUser');
+        Route::post('user-update', 'UserController@updateUser');
+        Route::post('user-photo', 'UserController@updatePhoto');
     });
 });
 

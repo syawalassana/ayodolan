@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
@@ -9,10 +10,11 @@ use App\Wisatawan;
 use Exception;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 
-class UserController
+class UserController extends Controller
 {
     public function register(Request $request)
     {
@@ -149,5 +151,87 @@ class UserController
             'data' => $u,
             'message' => 'data user wisatawan',
         ]);
+    }
+
+    public function updateUser(Request $request)
+    {
+        $u = Auth::guard('api')->user();
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $u->id,
+            'phone' => 'required|numeric|unique:wisatawan,telpon,' . $u->wisatawan->id,
+        ];
+
+        $messages = [
+            'name.required' => 'Nama wajib terisi!',
+            'email.required' => 'Alamat email tidak boleh kosong!',
+            'email.email' => 'Format alamat email salah!',
+            'email.unique' => 'Alamat email sudah digunakan!',
+            'phone.required' => 'No Telepon tidak boleh kosong!',
+            'phone.numeric' => 'Format no Telepon salah!',
+            'phone.unique' => 'No Telepon sudah digunakan!',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'data' => '',
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $u->name = $request->name;
+        $u->email = $request->email;
+        $u->save();
+        if ($u) {
+            $w = Wisatawan::where('user_id', $u->id)->first();
+            $w->tanggal_lahir = $request->born;
+            $w->alamat = $request->address;
+            $w->telpon = $request->phone;
+            $w->save();
+
+            return response()->json([
+                'error' => [],
+                'status' => true,
+                'data' => new UserResource($u),
+                'message' => 'Berhasil perbaruhi!',
+            ]);
+        }
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $file = $request->image;
+
+        $file = str_replace('data:image/png;base64,', '', $file);
+        $file = str_replace(' ', '+', $file);
+        $file = base64_decode($file);
+        $imageName = time() . '.png';
+
+        $destinationPath = 'fotowisatawan';
+
+        File::exists('fotowisatawan') or File::makeDirectory('fotowisatawan');
+        File::exists($destinationPath) or File::makeDirectory($destinationPath);
+        file_put_contents($destinationPath . '/' . $imageName, $file);
+
+        $user = Auth::guard('api')->user();
+        if ($user->wisatawan->foto != '') {
+            $this->delete_image('fotowisatawan', $user->wisatawan->foto);
+        }
+        $w = Wisatawan::where('user_id', $user->id)->first();
+        $w->foto = $imageName;
+        $w->save();
+        if ($w) {
+            return response()->json(
+                [
+                    'errors' => [],
+                    'data' => $w->user,
+                    'status' => true,
+                    'message' => 'Anda berhasil ganti photo!',
+                ]
+            );
+        }
     }
 }

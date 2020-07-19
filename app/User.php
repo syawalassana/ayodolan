@@ -41,7 +41,7 @@ class User extends Authenticatable
     public function getUrlImageAttribute()
     {
         if ($this->wisatawan->foto) {
-            return asset('fotowisatawan/' . $this->wisawatan->foto);
+            return asset('fotowisatawan/' . $this->wisatawan->foto);
         }
 
         return asset(DEFAULT_USER_IMAGE);
