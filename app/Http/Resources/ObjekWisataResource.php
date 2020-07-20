@@ -26,7 +26,7 @@ class ObjekWisataResource extends JsonResource
              'id'=> $this->id,
              'nama_wisata'=> $this->nama_wisata,
              'lokasi'=> $this->lokasi,
-             'gambar'=> $this->gambar,
+             'gambar'=> $this->url_image,
              'tipe_wisata'=> $this->tipe_wisata,
              'ciri_khas'=> $this->ciri_khas,
              'deskripsi' => $this->deskripsi,

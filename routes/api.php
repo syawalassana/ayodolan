@@ -23,6 +23,7 @@ Route::namespace('Api')->group(function () {
     Route::get('paket/{id}', 'PaketController@detail');
     Route::get('makanan', 'MakananController@index');
     Route::get('event', 'EventController@index');
+    Route::get('wisata', 'ObjekWisataController@index');
 
     Route::middleware('auth:api')->group(function () {
         Route::post('logout', 'UserController@logout');
@@ -41,7 +42,6 @@ Route::post('transaksi/buat_transaksi', 'Api\TransaksiController@buat_transaksi'
 // Route::get('user', 'Api\HomeController@index');
 Route::get('user-res', 'Api\HomeController@getUserResource');
 Route::get('user-res-one', 'Api\HomeController@getUserResourceOne');
-Route::get('data_objek_wisata', 'Api\ObjekWisataController@index');
 Route::get('data_transaksi', 'Api\TransaksiController@index');
 Route::get('data_hotel', 'Api\HotelController@index');
 Route::get('data_mobil', 'Api\MobilController@index');

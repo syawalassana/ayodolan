@@ -16,7 +16,7 @@ class Wisatawan extends Model
             return date('d-m-Y', strtotime($this->tanggal_lahir));
         }
 
-        return date('d-m-Y', now());
+        return date('d-m-Y');
     }
 
     public function getUrlImageAttribute()
