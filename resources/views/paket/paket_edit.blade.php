@@ -69,7 +69,7 @@
                 <input type="text" name="harga_tour_guide" value="{{$data->harga_tour_guide}}" class="form-control" placeholder="Harga Tour Guide">
               </div>
               <div class="form-group">
-                <label>Deskripsi</label>
+                <label>Biaya Supir</label>
                 <input type="text" name="harga_supir" value="{{$data->harga_supir}}" class="form-control" name="harga_supir" placeholder="Harga Supir">
               </div>
 
