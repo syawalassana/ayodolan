@@ -168,7 +168,7 @@ class PaketController extends Controller
             $gambar->move($tujuan_upload, $nama_gambar);
             if (file_exists('paket/' . $data_paket->gambar_paket)) {
                 //skrip untuk menghapus data foto lama yang di update
-                unlink('objekwisata/' . $data_paket->gambar_paket);
+                unlink('paket/' . $data_paket->gambar_paket);
             }
             $data_paket->gambar_paket = $nama_gambar;
         }
