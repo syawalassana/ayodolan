@@ -11,7 +11,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $e = Event::whereDate('tgl_mulai', '<=', Carbon::now())->whereDate('tgl_selesai', '>=', Carbon::now())->get();
+        $e = Event::whereDate('tgl_mulai', '<=', Carbon::now())->whereDate('tgl_selesai', '>=', Carbon::now())->orderBy('created_at', 'DESC')->get();
 
         $data_event = EventResource::collection($e);
 

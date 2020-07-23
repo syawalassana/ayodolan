@@ -37,6 +37,9 @@ class PaketResource extends JsonResource
         'detail_paket_wisata' => $paketdetail,
         'harga_final' => $this->harga_final_tx,
         'harga_final_r' => $this->harga_final,
+        'harga_supir_r' => $this->harga_supir,
+        'harga_tour_guide_r' => $this->harga_tour_guide,
+        'percent_margin' => '1.2',
        ];
     }
 }

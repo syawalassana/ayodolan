@@ -18,7 +18,7 @@ class EventResource extends JsonResource
         $gambardetail = [];
         $gambardetailevent = GambarEvent::where('event_id', $this->id)->get();
         foreach ($gambardetailevent as $key => $value) {
-            $gambardetail[] = $value->path;
+            $gambardetail[] = asset($value->path);
         }
 
         return [

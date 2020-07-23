@@ -36,7 +36,6 @@ class PaketController extends Controller
 
     public function invoice(Request $request)
     {
-        // return $request->all();
         $user = Auth::guard('api')->user();
 
         $t = new Transaksi();

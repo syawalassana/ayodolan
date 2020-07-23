@@ -20,6 +20,7 @@ class PaketDetailResource extends JsonResource
             'gambar' => $this->objekWisata->url_image,
             'mulai' => $this->start,
             'selesai' => $this->end,
+            'lokasi' => $this->objekWisata->lokasi,
            ];
     }
 }

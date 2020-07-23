@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use App\GambarWisata;
-use App\ObjekWisata;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ObjekWisataResource extends JsonResource
@@ -15,24 +14,23 @@ class ObjekWisataResource extends JsonResource
      * @return array
      */
     public function toArray($request)
-    {    
-        $gambardetail=[];     
+    {
+        $gambardetail = [];
         $gambardetailwisata = GambarWisata::where('obj_wisata_id', $this->id)->get();
-        foreach($gambardetailwisata as $key=>$value){
-            $gambardetail[]=$value->path;
+        foreach ($gambardetailwisata as $key => $value) {
+            $gambardetail[] = asset($value->path);
         }
-        
+
         return [
-             'id'=> $this->id,
-             'nama_wisata'=> $this->nama_wisata,
-             'lokasi'=> $this->lokasi,
-             'gambar'=> $this->url_image,
-             'tipe_wisata'=> $this->tipe_wisata,
-             'ciri_khas'=> $this->ciri_khas,
+             'id' => $this->id,
+             'nama_wisata' => $this->nama_wisata,
+             'lokasi' => $this->lokasi,
+             'gambar' => $this->url_image,
+             'tipe_wisata' => $this->tipe_wisata,
+             'ciri_khas' => $this->ciri_khas,
              'deskripsi' => $this->deskripsi,
-             'gambar_detail'=> $gambardetail,
+             'gambar_detail' => $gambardetail,
 
         ];
-           
     }
 }

@@ -13,12 +13,12 @@ class Paket extends Model
 
     public function getHargaFinalAttribute()
     {
-        return $this->harga + $this->harga_supir + $this->harga_tour_guide;
+        return $this->harga;
     }
 
     public function getHargaFinalTxAttribute()
     {
-        $h = $this->harga + $this->harga_supir + $this->harga_tour_guide;
+        $h = $this->harga;
 
         return Ayo::rupiah($h);
     }
