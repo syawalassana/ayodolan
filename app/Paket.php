@@ -9,6 +9,25 @@ class Paket extends Model
 {
     protected $table = 'paket';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($paket) {
+            $relationMethods = ['transaksi'];
+
+            foreach ($relationMethods as $relationMethod) {
+                if ($paket->$relationMethod()->count() > 0) {
+                    // return redirect()->back()->with('error', 'Data ada relasinya');
+                    // session()->now('error', 'Data memiliki relasi dengan ' . $relationMethod);
+                    session()->flash('error', 'Gagal hapus karena memiliki relasi dengan data ' . $relationMethod);
+
+                    return false;
+                }
+            }
+        });
+    }
+
     protected $appends = ['harga_tx','harga_supir_tx','harga_tour_guide_tx','url_image','harga_final','harga_final_tx'];
 
     public function getHargaFinalAttribute()

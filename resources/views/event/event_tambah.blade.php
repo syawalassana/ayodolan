@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
             <label>Deskripsi Event</label>
-            <input type="text" name="deskripsi_event" value="{{old('deskripsi_event')}}" class="form-control"  placeholder="Deskripsikan Event">
+            <textarea name="deskripsi_event" class="form-control" placeholder="Deskripsikan Event">{{old('deskripsi_event')}}</textarea>
         </div>
     </div>
     <div class="box-footer">

@@ -80,8 +80,8 @@ class PaketController extends Controller
             // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'paket';
             $gambar->move($tujuan_upload, $nama_gambar);
-            $data_paket->gambar_paket= $nama_gambar;
-            }
+            $data_paket->gambar_paket = $nama_gambar;
+        }
         $data_paket->mobil_id = $request->mobil_id;
         $data_paket->hotel_id = $request->hotel_id;
         $data_paket->lama_liburan = $request->lama_liburan;
@@ -200,7 +200,7 @@ class PaketController extends Controller
         $paket->delete();
         $paket->paketDetail()->delete();
 
-        return redirect('/paket');
+        return redirect('/paket')->with('success', 'Berhasil hapus data paket!');
     }
     public function tambahwisata($id)
     {

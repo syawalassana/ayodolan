@@ -54,6 +54,7 @@
     </section>
 
     <section class="content">
+        @include('layouts.message')
         @yield('isi')
     </section>
   </div>

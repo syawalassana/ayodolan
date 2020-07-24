@@ -9,6 +9,25 @@ class Mobil extends Model
 {
     protected $table = 'mobil';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($mobil) {
+            $relationMethods = ['paket'];
+
+            foreach ($relationMethods as $relationMethod) {
+                if ($mobil->$relationMethod()->count() > 0) {
+                    // return redirect()->back()->with('error', 'Data ada relasinya');
+                    // session()->now('error', 'Data memiliki relasi dengan ' . $relationMethod);
+                    session()->flash('error', 'Gagal hapus karena memiliki relasi dengan data ' . $relationMethod);
+
+                    return false;
+                }
+            }
+        });
+    }
+
     protected $appends = ['harga_sewa_tx','url_image'];
 
     public function getUrlImageAttribute()
@@ -31,7 +50,7 @@ class Mobil extends Model
 
     public function paket()
     {
-        return $this->hasMany('App\Paket', 'paket_id');
+        return $this->hasMany('App\Paket', 'mobil_id');
     }
     public function mobildetail()
     {

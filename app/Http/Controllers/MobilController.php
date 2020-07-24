@@ -170,7 +170,8 @@ class MobilController extends Controller
             unlink('mobil/' . $mobil->foto_mobil);    //proses menhapus yang ada pada table mobil
         }
         $mobil->delete(); //proses hapus dari database
-        return redirect('/mobil');
+
+        return redirect('/mobil')->with('success', 'Berhasil hapus data mobil!');
     }
 
     public function tambah_gambar($id)
