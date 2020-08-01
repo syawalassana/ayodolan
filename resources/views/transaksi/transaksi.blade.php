@@ -5,7 +5,6 @@
     <div class="box-header with-border">
       <h3 class="box-title">Halaman Transaksi</h3>
       <div class="box-tools">
-        <a class="btn btn-success" href="/transaksi/create"> <i class="fa fa-plus"></i> Tambah Data</a>
         <tr></tr>
       </div>
     </div>

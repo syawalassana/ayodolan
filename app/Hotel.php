@@ -9,12 +9,12 @@ class Hotel extends Model
 {
     protected $table = 'hotel';
 
-    protected static function boot()
+        protected static function boot() 
     {
         parent::boot();
 
-        static::deleting(function ($hotel) {
-            $relationMethods = ['paket'];
+        static::deleting(function ($hotel) { //fungsinya data hotel mau dihapus, akan gagal jika data hotel berelasi
+            $relationMethods = ['paket']; 
 
             foreach ($relationMethods as $relationMethod) {
                 if ($hotel->$relationMethod()->count() > 0) {
@@ -28,12 +28,12 @@ class Hotel extends Model
         });
     }
 
-    protected $appends = ['harga_tx','url_image'];
+    protected $appends = ['harga_tx','url_image']; 
 
-    public function getUrlImageAttribute()
+    public function getUrlImageAttribute() 
     {
-        if ($this->foto_hotel) {
-            return asset('hotel/' . $this->foto_hotel);
+        if ($this->foto_hotel) { 
+            return asset('hotel/' . $this->foto_hotel); //mengkonversikan dengan url gambar secara lengkap
         }
 
         return asset(DEFAULT_IMAGE);

@@ -11,7 +11,7 @@ class MyBookingController extends Controller
 {
     public function index()
     {
-        $user = Auth::guard('api')->user();
+        $user = Auth::guard('api')->user(); //untuk menangkap user yg aktif, menggunakan guard dikarenakan kita mengakses api
         $t = Transaksi::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
 
         $t = TransaksiResource::collection($t);
