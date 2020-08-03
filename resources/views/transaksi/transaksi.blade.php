@@ -23,7 +23,7 @@
       </tr>
       @foreach ($data as $key=>$row)
       <tr>
-      <td>{{$key+1}}</td>
+         <td>{{$key+1}}</td>
         <td>{{$row->nomor_invoice}}</td>
         <td>{{$row->user->name}}</td>
         <td>{{$row->paket->nama_paket}}</td>
@@ -31,11 +31,6 @@
         <td>{{$row->status}}</td>
         <td>{{$row->created_at->format('d-m-Y H:i')}}</td>
         <td><a class="btn btn-info" href="/transaksi/{{$row->id}}">Lihat</a></td>
-        <td>
-          <form onsubmit="return confirm('Anda Yakin Ingin Menghapus?');" action="/paket/{{$row->id}}" method="post">
-            @csrf
-          </form>
-        </td>
       </tr>
       @endforeach
       </table>

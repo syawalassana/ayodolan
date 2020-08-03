@@ -53,6 +53,8 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/hapus-wisata/{id}', 'PaketDetailController@hapusWisata');
     Route::get('/tambah-detail-wisatawan/{id}', 'TransaksiController@tambah_data');
     Route::post('tambah-detail-wisatawan', 'TransaksiPesertaController@store');
+    Route::get('laporan', 'ReportController@index');
+    Route::get('laporan-export', 'ReportController@export');
 });
 
 Route::get('/slider', function () {
