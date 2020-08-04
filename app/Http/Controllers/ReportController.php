@@ -19,4 +19,11 @@ class ReportController extends Controller
     {
         return Excel::download(new TransaksiExport, 'Transaksi ' . date('d-m-Y') . '.xlsx');
     }
+
+    public function print()
+    {
+        return view('report.cetak', [
+            'data' => Transaksi::orderBy('created_at', 'DESC')->get(),
+        ]);
+    }
 }

@@ -55,6 +55,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('tambah-detail-wisatawan', 'TransaksiPesertaController@store');
     Route::get('laporan', 'ReportController@index');
     Route::get('laporan-export', 'ReportController@export');
+    Route::get('laporan-print', 'ReportController@print');
 });
 
 Route::get('/slider', function () {

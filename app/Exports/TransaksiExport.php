@@ -26,17 +26,23 @@ class TransaksiExport implements FromCollection, WithHeadings, ShouldAutoSize, W
     public function headings(): array
     {
         return [
-            'No Invoice',
-            'Nama Wisatawan',
-            'Nama Paket',
-            'Jumlah Peserta',
-            'Tanggal Liburan',
-            'Harga Supir',
-            'Harga Tour Guide',
-            'Harga Paket Wisata',
-            'Status Pembayaran',
-            'Tanggal Invoice',
-            'Total',
+            [
+                'Laporan Transaksi Sistem Tour Guide Ayo Dolan',
+            ],
+            [
+                'No Invoice',
+                'Nama Wisatawan',
+                'Nama Paket',
+                'Jumlah Peserta',
+                'Tanggal Liburan',
+                'Harga Supir',
+                'Harga Tour Guide',
+                'Harga Paket Wisata',
+                'Status Pembayaran',
+                'Tanggal Invoice',
+                'Total',
+            ],
+
         ];
     }
 

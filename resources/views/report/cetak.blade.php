@@ -1,19 +1,18 @@
-@extends('layouts.master')
-@section('isi')
-
-<div class="box">
-    <div class="box-header with-border">
-      <h3 class="box-title">Laporan Transaksi</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <div class="form-group">
-            <a target="_blank" href="/laporan-print" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
-            <a href="/laporan-export" class="btn btn-primary">
-                Export Excel
-            </a>
-        </div>
-        <table class="table table-bordered">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Transaksi Sistem Tour Guide Ayo Dolan</title>
+    <style>
+        table{
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body onload="window.print()">
+    <h2 style="text-align: center;">Laporan Transaksi <br>Sistem Tour Guide Ayo Dolan</h2>
+    <table width="100%" border="1" cellspacing="0" cellpadding="5">
         <tr>
             <th>No</th>
             <th>Nomor Invoice</th>
@@ -47,17 +46,5 @@
         </tr>
         @endforeach
         </table>
-    </div>
-    <!-- /.box-body -->
-    <div class="box-footer clearfix">
-            {{ $data->links() }}
-    </div>
-  </div>
-
-
-
-
-    <table border="1">
-
-    </table>
-@endsection
+</body>
+</html>
